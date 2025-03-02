@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -11,6 +17,8 @@
 </head>
 <body>
     <header>
+
+
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MenuProject</a>
@@ -21,19 +29,21 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1" id="nav-links">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Anasayfa</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Hakkımızda</a>
                         </li>
+                      
                     </ul>
 
 
                     @if (User.Identity!.IsAuthenticated)
                     {
+                        var user = await UserManager.GetUserAsync(User); <!-- Kullanıcı bilgilerini alıyoruz -->
                         <ul class="navbar-nav ms-auto">
                             <li class="nav-item">
-                                <span class="nav-link text-dark">Hoş geldin, @User.Identity.Name!</span>
+                                <span class="nav-link text-dark">Hoş geldin,@(user != null ? user.UserName : "Misafir")!</span>
                             </li>
                             <li class="nav-item">
                                 <form asp-area="" asp-controller="Account" asp-action="Logout" method="post">
@@ -68,6 +78,25 @@
             &copy; 2025 - MenuProject - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+    <style>
+        /* Navbar'ı sabit üstte tut */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.9); /* Hafif saydam arka plan */
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 10px 20px;
+        }
+
+        /* Sayfa içeriğinin navbar altında kalmaması için üst boşluk ekleyelim */
+        body {
+            padding-top: 70px;
+        }
+
+    </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -75,7 +104,7 @@
                 console.log("Kullanıcı rolü:", data.role); // Tarayıcı konsoluna yazdır
                 if (data.role === "Student") {
                     $("#nav-links").html(`
-                        <li class="nav-item"><a class="nav-link" href="/Student/Courses">Eğitimlerim</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/Student/Courses">Kurslarım</a></li>
                         <li class="nav-item"><a class="nav-link" href="/Student/Exams">Sınavlarım</a></li>
                     `);
                 } else if (data.role === "Teacher") {

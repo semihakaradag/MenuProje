@@ -2,34 +2,59 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using MenuProject.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace MenuProject.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly UserManager<IdentityUser> _userManager;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, UserManager<IdentityUser> userManager)
     {
         _logger = logger;
+        _userManager = userManager;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
+        if (User.Identity!.IsAuthenticated)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user != null)
+            {
+                var roles = await _userManager.GetRolesAsync(user);
+
+                if (roles.Contains("Student"))
+                {
+                    return RedirectToAction("StudentDashboard", "Home");
+                }
+                else if (roles.Contains("Teacher"))
+                {
+                    return RedirectToAction("TeacherDashboard", "Home");
+                }
+                else if (roles.Contains("Admin"))
+                {
+                    return RedirectToAction("Index", "Home", new { area = "Admin" });
+                }
+            }
+        }
+
+        return View(); // Eðer giriþ yapýlmamýþsa Welcome sayfasýný göster
     }
 
     public IActionResult Privacy()
     {
         return View();
     }
-    [Authorize(Roles = "Student")]
+    [CustomAuthorize("Student")]
     public IActionResult StudentDashboard()
     {
         return View();
     }
 
-    [Authorize(Roles = "Teacher")]
+    [CustomAuthorize("Teacher")]
     public IActionResult TeacherDashboard()
     {
         return View();

@@ -44,6 +44,7 @@ builder.Services.ConfigureApplicationCookie(opt =>
     opt.AccessDeniedPath = new PathString("/Account/AccessDenied"); // Yetkisiz eriþimler için yönlendirme
 });
 
+
 // Dosya saðlayýcý ekleyelim
 builder.Services.AddSingleton<IFileProvider>(
     new PhysicalFileProvider(Directory.GetCurrentDirectory()));

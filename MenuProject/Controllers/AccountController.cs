@@ -75,8 +75,6 @@ namespace MenuProject.Controllers
 
                 return RedirectToAction("Index", "Home"); // Eğer rol yoksa anasayfaya yönlendir
             }
-
-
             if (result.IsLockedOut)
             {
                 ModelState.AddModelError(string.Empty, "Çok fazla başarısız giriş yaptınız, 3 dakika sonra tekrar deneyin.");

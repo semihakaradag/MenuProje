@@ -1,6 +1,87 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "Hakkımızda";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<div class="about-container">
+    <h1>@ViewData["Title"]</h1>
+    <p class="about-subtitle">Bu platform, eğitim süreçlerini daha sistemli ve verimli hale getirmek için geliştirilmiştir.</p>
+
+    <div class="about-section">
+        <h2>📌 Sistemin Çalışma Mantığı</h2>
+        <p>
+            📌 Rol Atamaları ve Yetkilendirme Sistemi
+            <br>
+            Web sitemizde, kullanıcıların sadece kendi yetkileri doğrultusunda sayfalara erişmesini sağlamak için rol bazlı yetkilendirme sistemi uygulanmıştır.
+            Bu sayede her kullanıcı sadece kendisine ait içeriklere erişebilir ve diğer kullanıcıların yetkili olmadığı sayfalara erişmesi engellenir.
+        </p>
+    </div>
+
+    <div class="about-section">
+        <h2>🔹 Kullanıcı Rolleri</h2>
+        <ul>
+            <li><strong>Öğrenciler:</strong> Dersleri ve sınavlarını görüntüleyebilir.</li>
+            <li><strong>Öğretmenler:</strong> Ders yönetebilir ve sınav planlayabilir.</li>
+            <li><strong>Yöneticiler:</strong> Kullanıcıları yönetebilir ve sistemde düzenlemeler yapabilir.</li>
+        </ul>
+    </div>
+
+    <div class="about-section">
+        <h2>🔹 Kayıt ve Doğrulama</h2>
+        <p>
+            Kullanıcı kayıt sürecinde seçtiği rol doğrultusunda sisteme atanır.
+            **Öğretmen kayıtları için `@@edu.tr` e-posta adresi zorunludur.**
+            Gelecekte, **e-posta doğrulama ve kod gönderme sistemleri** eklenerek güvenlik artırılacaktır.
+        </p>
+    </div>
+
+    
+</div>
+
+<style>
+    /* Sayfa düzeni */
+    .about-container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        border-radius: 10px;
+        background: white;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .about-subtitle {
+        font-size: 1.2rem;
+        color: #555;
+        margin-bottom: 20px;
+    }
+
+    .about-section {
+        text-align: left;
+        margin-top: 20px;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+        color: #007bff;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    li {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+        padding-left: 20px;
+        position: relative;
+    }
+
+       
+</style>

@@ -19,7 +19,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                    <ul class="navbar-nav flex-grow-1" id="nav-links">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
@@ -28,6 +28,7 @@
                         </li>
                     </ul>
 
+
                     @if (User.Identity!.IsAuthenticated)
                     {
                         <ul class="navbar-nav ms-auto">
@@ -35,7 +36,7 @@
                                 <span class="nav-link text-dark">Hoş geldin, @User.Identity.Name!</span>
                             </li>
                             <li class="nav-item">
-                                <form asp-controller="Account" asp-action="Logout" method="post">
+                                <form asp-area="" asp-controller="Account" asp-action="Logout" method="post">
                                     <button type="submit" class="btn btn-outline-danger">Çıkış Yap</button>
                                 </form>
                             </li>
@@ -53,7 +54,7 @@
                         </ul>
                     }
                 </div>
-
+</div>
         </nav>
     </header>
     <div class="container">
@@ -67,6 +68,29 @@
             &copy; 2025 - MenuProject - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.get("/Account/GetUserRole", function (data) {
+                console.log("Kullanıcı rolü:", data.role); // Tarayıcı konsoluna yazdır
+                if (data.role === "Student") {
+                    $("#nav-links").html(`
+                        <li class="nav-item"><a class="nav-link" href="/Student/Courses">Eğitimlerim</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/Student/Exams">Sınavlarım</a></li>
+                    `);
+                } else if (data.role === "Teacher") {
+                    $("#nav-links").html(`
+                        <li class="nav-item"><a class="nav-link" href="/Teacher/Classes">Derslerim</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/Teacher/Students">Öğrencilerim</a></li>
+                    `);
+                }
+            }).fail(function () {
+                console.log("Hata: Kullanıcı rolü alınamadı.");
+            });
+        });
+    </script>
+
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

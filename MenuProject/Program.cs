@@ -52,6 +52,35 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
+var scope = app.Services.CreateScope();
+var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+string adminEmail = "admin@menuproject.com";
+string adminPassword = "Admin@123"; // Güçlü bir þifre belirleyebilirsin
+
+if (await roleManager.FindByNameAsync("Admin") == null)
+{
+    await roleManager.CreateAsync(new IdentityRole("Admin"));
+}
+
+if (await userManager.FindByEmailAsync(adminEmail) == null)
+{
+    var adminUser = new IdentityUser
+    {
+        UserName = "AdminUser",
+        Email = adminEmail,
+        EmailConfirmed = true
+    };
+
+    var result = await userManager.CreateAsync(adminUser, adminPassword);
+
+    if (result.Succeeded)
+    {
+        await userManager.AddToRoleAsync(adminUser, "Admin");
+    }
+}
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -64,6 +93,14 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+
+
+
+app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+
 
 // Varsayýlan yönlendirme
 app.MapControllerRoute(

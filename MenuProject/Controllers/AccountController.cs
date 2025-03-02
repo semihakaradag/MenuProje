@@ -21,6 +21,22 @@ namespace MenuProject.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public async Task<IActionResult> GetUserRole()
+        //Kullanıcının giriş yapıp yapmadığını kontrol eder.
+        //Eğer giriş yapmışsa kullanıcının rolünü JSON olarak döndürür.
+        //Eğer giriş yapmamışsa "Guest" rolü döndürür.
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user != null)
+            {
+                var roles = await _userManager.GetRolesAsync(user);
+                return Json(new { role = roles.Count > 0 ? roles[0] : "None" });
+            }
+            return Json(new { role = "Guest" });
+        }
+
+
         [HttpPost]
         public async Task<IActionResult> SignIn(SignInViewModel model)
         {
@@ -44,7 +60,11 @@ namespace MenuProject.Controllers
                 // Kullanıcının rollerini al
                 var roles = await _userManager.GetRolesAsync(user);
 
-                if (roles.Contains("Student"))
+                if (model.Email == "admin@menuproject.com") // Sadece belirli admin maili ile giriş
+                {
+                    return RedirectToAction("Index", "Home", new { area = "Admin" }); // Admin paneline yönlendir
+                }
+                else if (roles.Contains("Student"))
                 {
                     return RedirectToAction("StudentDashboard", "Home"); // Öğrenci sayfasına yönlendir
                 }
@@ -52,13 +72,10 @@ namespace MenuProject.Controllers
                 {
                     return RedirectToAction("TeacherDashboard", "Home"); // Öğretmen sayfasına yönlendir
                 }
-                else if (roles.Contains("Admin"))
-                {
-                    return RedirectToAction("AdminDashboard", "Home"); // Admin paneline yönlendir
-                }
 
                 return RedirectToAction("Index", "Home"); // Eğer rol yoksa anasayfaya yönlendir
             }
+
 
             if (result.IsLockedOut)
             {

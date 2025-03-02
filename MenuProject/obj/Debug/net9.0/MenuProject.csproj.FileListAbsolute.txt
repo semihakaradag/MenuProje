@@ -311,8 +311,6 @@ C:\Users\semih\source\repos\MenuProject\MenuProject\obj\Debug\net9.0\compressed\
 C:\Users\semih\source\repos\MenuProject\MenuProject\obj\Debug\net9.0\compressed\5y3y8j4rgp-muycvpuwrr.gz
 C:\Users\semih\source\repos\MenuProject\MenuProject\obj\Debug\net9.0\compressed\hdko4cvhkg-87fc7y1x7t.gz
 C:\Users\semih\source\repos\MenuProject\MenuProject\obj\Debug\net9.0\compressed\j81krnn6e5-mlv21k5csn.gz
-C:\Users\semih\source\repos\MenuProject\MenuProject\obj\Debug\net9.0\compressed\mwsmn0z9m4-esb6exra2y.gz
-C:\Users\semih\source\repos\MenuProject\MenuProject\obj\Debug\net9.0\compressed\31qdfnkmcl-esb6exra2y.gz
 C:\Users\semih\source\repos\MenuProject\MenuProject\obj\Debug\net9.0\staticwebassets.build.json
 C:\Users\semih\source\repos\MenuProject\MenuProject\obj\Debug\net9.0\staticwebassets.development.json
 C:\Users\semih\source\repos\MenuProject\MenuProject\obj\Debug\net9.0\staticwebassets.build.endpoints.json
@@ -329,3 +327,6 @@ C:\Users\semih\source\repos\MenuProject\MenuProject\obj\Debug\net9.0\refint\Menu
 C:\Users\semih\source\repos\MenuProject\MenuProject\obj\Debug\net9.0\MenuProject.pdb
 C:\Users\semih\source\repos\MenuProject\MenuProject\obj\Debug\net9.0\MenuProject.genruntimeconfig.cache
 C:\Users\semih\source\repos\MenuProject\MenuProject\obj\Debug\net9.0\ref\MenuProject.dll
+C:\Users\semih\source\repos\MenuProject\MenuProject\obj\Debug\net9.0\scopedcss\Areas\Admin\Views\Shared\_Layout.cshtml.rz.scp.css
+C:\Users\semih\source\repos\MenuProject\MenuProject\obj\Debug\net9.0\compressed\mwsmn0z9m4-2nvoucrhyy.gz
+C:\Users\semih\source\repos\MenuProject\MenuProject\obj\Debug\net9.0\compressed\31qdfnkmcl-2nvoucrhyy.gz

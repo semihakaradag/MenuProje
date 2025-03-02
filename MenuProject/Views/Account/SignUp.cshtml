@@ -1,0 +1,58 @@
+﻿@model MenuProject.ViewModels.SignUpViewModel
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+        {
+            <p>@error.ErrorMessage</p>
+        }
+    </div>
+}
+
+<h2 class="text-center">Kayıt Ol</h2>
+
+<!-- Butonlar -->
+<div class="text-center">
+    <button id="studentBtn" class="btn btn-primary">Öğrenci Kaydı</button>
+    <button id="teacherBtn" class="btn btn-secondary">Öğretmen Kaydı</button>
+</div>
+
+<br>
+
+<!-- Öğrenci Formu -->
+<div id="studentForm" style="display: none;">
+    <h3>Öğrenci Kaydı</h3>
+    <form asp-action="RegisterStudent" method="post">
+        <input asp-for="UserName" class="form-control" placeholder="Kullanıcı Adı" />
+        <input asp-for="Email" class="form-control" placeholder="Email" />
+        <input asp-for="Phone" class="form-control" placeholder="Telefon" />
+        <input asp-for="Password" type="password" class="form-control" placeholder="Şifre" />
+        <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="Şifre Tekrar" />
+        <button type="submit" class="btn btn-primary">Kayıt Ol</button>
+    </form>
+</div>
+
+<!-- Öğretmen Formu -->
+<div id="teacherForm" style="display: none;">
+    <h3>Öğretmen Kaydı</h3>
+    <form asp-action="RegisterTeacher" method="post">
+        <input asp-for="UserName" class="form-control" placeholder="Kullanıcı Adı" />
+        <input asp-for="Email" class="form-control" placeholder="Email" />
+        <input asp-for="Phone" class="form-control" placeholder="Telefon" />
+        <input asp-for="Password" type="password" class="form-control" placeholder="Şifre" />
+        <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="Şifre Tekrar" />
+        <button type="submit" class="btn btn-secondary">Kayıt Ol</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById("studentBtn").addEventListener("click", function () {
+        document.getElementById("studentForm").style.display = "block";
+        document.getElementById("teacherForm").style.display = "none";
+    });
+
+    document.getElementById("teacherBtn").addEventListener("click", function () {
+        document.getElementById("teacherForm").style.display = "block";
+        document.getElementById("studentForm").style.display = "none";
+    });
+</script>

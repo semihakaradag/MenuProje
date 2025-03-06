@@ -1,4 +1,10 @@
-﻿@model IEnumerable<MenuProject.Models.UserMenu>
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_MenuLayout.cshtml";
+}
+
+@model IEnumerable<MenuProject.Models.UserMenu>
 
 <h2>Menü Yönetimi</h2>
 <a class="btn btn-primary mb-3" asp-action="Create">+ Yeni Menü Ekle</a>
@@ -39,3 +45,4 @@
         }
     </tbody>
 </table>
+

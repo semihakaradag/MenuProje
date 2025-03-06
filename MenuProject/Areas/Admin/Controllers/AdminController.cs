@@ -12,12 +12,12 @@ namespace MenuProject.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
-    public class HomeController : Controller
+    public class AdminController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly MenuDbContext _context;
 
-        public HomeController(UserManager<IdentityUser> userManager,MenuDbContext context)
+        public AdminController(UserManager<IdentityUser> userManager,MenuDbContext context)
         {
             _userManager = userManager;
             _context = context;

@@ -1,4 +1,10 @@
-﻿@model MenuProject.Models.UserMenu
+﻿
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_MenuLayout.cshtml";
+}
+
+@model MenuProject.Models.UserMenu
 
 <h2>Yeni Menü Ekle</h2>
 
@@ -50,3 +56,4 @@
     <button type="submit" class="btn btn-success">Kaydet</button>
     <a class="btn btn-secondary" asp-action="Index">İptal</a>
 </form>
+

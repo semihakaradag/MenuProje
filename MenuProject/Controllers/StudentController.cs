@@ -11,7 +11,7 @@ namespace MenuProject.Controllers
         {
             return View();
         }
-        public IActionResult Exams()
+        public IActionResult Certificate()
         {
             return View();
         }

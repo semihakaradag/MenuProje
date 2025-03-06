@@ -1,2 +1,41 @@
-﻿<h2>Admin Sayfasına Hoş Geldiniz</h2>
+﻿@model IEnumerable<MenuProject.Models.UserMenu>
 
+<h2>Menü Yönetimi</h2>
+<a class="btn btn-primary mb-3" asp-action="Create">+ Yeni Menü Ekle</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Ad</th>
+            <th>Controller</th>
+            <th>Action</th>
+            <th>İkon</th>
+            <th>Sıralama</th>
+            <th>Alt Menü (ParentID)</th>
+            <th>Görünürlük</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var menu in Model)
+        {
+            <tr>
+                <td>@menu.Id</td>
+                <td>@menu.Name</td>
+                <td>@menu.ControllerName</td>
+                <td>@menu.ActionName</td>
+                <td><i class="@menu.Icon"></i> @menu.Icon</td>
+                <td>@menu.SortNumber</td>
+                <td>@(menu.ParentId.HasValue ? menu.ParentId.ToString() : "Ana Menü")</td>
+                <td>@(menu.IsVisible ? "Evet" : "Hayır")</td>
+                <td>
+                    <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@menu.Id">Düzenle</a>
+                    <form asp-action="Delete" asp-route-id="@menu.Id" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Bu menüyü silmek istediğinizden emin misiniz?');">Sil</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

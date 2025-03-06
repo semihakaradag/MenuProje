@@ -5,11 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using MenuProject.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Veritabaný baðlantýsýný ekleyelim
-builder.Services.AddDbContext<MenuDbContext>(options =>
+builder.Services.AddDbContextFactory<MenuDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("SqlCon"));
 });
@@ -30,7 +31,7 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("RequireTeacherRole", policy => policy.RequireRole("Teacher"));
     options.AddPolicy("RequireStudentRole", policy => policy.RequireRole("Student"));
 });
-
+builder.Services.AddScoped<ClaimsService>();
 // Cookie ayarlarýný yapýlandýralým
 builder.Services.ConfigureApplicationCookie(opt =>
 {
@@ -44,6 +45,19 @@ builder.Services.ConfigureApplicationCookie(opt =>
     opt.AccessDeniedPath = new PathString("/Account/AccessDenied"); // Yetkisiz eriþimler için yönlendirme
 });
 
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+})
+.AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+{
+    options.LoginPath = "/Account/SignIn"; // Kullanýcý giriþ yapmadýysa yönlendirilecek sayfa
+    options.LogoutPath = "/Account/Logout"; // Çýkýþ yaparken yönlendirilecek sayfa
+    options.AccessDeniedPath = "/Account/AccessDenied"; // Yetkisiz eriþim olursa yönlendirme
+});
+
 
 // Dosya saðlayýcý ekleyelim
 builder.Services.AddSingleton<IFileProvider>(
@@ -51,36 +65,44 @@ builder.Services.AddSingleton<IFileProvider>(
 
 builder.Services.AddControllersWithViews();
 
+
+
+
 var app = builder.Build();
 
 var scope = app.Services.CreateScope();
-var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
-var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+var services = scope.ServiceProvider;
 
-string adminEmail = "admin@menuproject.com";
-string adminPassword = "Admin@123"; // Güçlü bir þifre belirleyebilirsin
+ 
+    // **Admin Kullanýcýsýný ve Rolünü Ekleme**
+    var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
 
-if (await roleManager.FindByNameAsync("Admin") == null)
-{
-    await roleManager.CreateAsync(new IdentityRole("Admin"));
-}
+    string adminEmail = "admin@menuproject.com";
+    string adminPassword = "Admin@123"; // Güçlü bir þifre belirleyebilirsin
 
-if (await userManager.FindByEmailAsync(adminEmail) == null)
-{
-    var adminUser = new IdentityUser
+    if (roleManager.FindByNameAsync("Admin") == null)
     {
-        UserName = "AdminUser",
-        Email = adminEmail,
-        EmailConfirmed = true
-    };
-
-    var result = await userManager.CreateAsync(adminUser, adminPassword);
-
-    if (result.Succeeded)
-    {
-        await userManager.AddToRoleAsync(adminUser, "Admin");
+        await roleManager.CreateAsync(new IdentityRole("Admin"));
     }
-}
+
+    if (userManager.FindByEmailAsync(adminEmail) == null)
+    {
+        var adminUser = new IdentityUser
+        {
+            UserName = "AdminUser",
+            Email = adminEmail,
+            EmailConfirmed = true
+        };
+
+        var result = await userManager.CreateAsync(adminUser, adminPassword);
+
+        if (result.Succeeded)
+        {
+            await userManager.AddToRoleAsync(adminUser, "Admin");
+        }
+    }
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

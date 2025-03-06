@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using MenuProject.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +9,9 @@ namespace MenuProject.Data
     {
         public MenuDbContext(DbContextOptions<MenuDbContext> options) : base(options)
         {
+
         }
+        public DbSet<UserMenu> UserMenus { get; set; }
+        public DbSet<RoleMenu> RoleMenus { get; set; }
     }
 }

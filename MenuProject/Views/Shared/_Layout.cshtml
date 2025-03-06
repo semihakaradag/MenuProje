@@ -1,6 +1,13 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿@using System.Security.Claims
+@using Microsoft.AspNetCore.Identity
 @inject UserManager<IdentityUser> UserManager
-@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    var user = HttpContextAccessor.HttpContext.User;
+    
+}
 
 
 
@@ -26,43 +33,30 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1" id="nav-links">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Anasayfa</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Hakkımızda</a>
-                        </li>
-                      
-                    </ul>
-
-
-                    @if (User.Identity!.IsAuthenticated)
-                    {
-                        var user = await UserManager.GetUserAsync(User); <!-- Kullanıcı bilgilerini alıyoruz -->
-                        <ul class="navbar-nav ms-auto">
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        @if (User.Identity!.IsAuthenticated)
+                        {
+                            var currentUser = await UserManager.GetUserAsync(User);
                             <li class="nav-item">
-                                <span class="nav-link text-dark">Hoş geldin,@(user != null ? user.UserName : "Misafir")!</span>
+                                <span class="nav-link">Hoş geldin, @(currentUser?.UserName ?? "Misafir")!</span>
                             </li>
                             <li class="nav-item">
-                                <form asp-area="" asp-controller="Account" asp-action="Logout" method="post">
+                                <form asp-controller="Account" asp-action="Logout" method="post">
                                     <button type="submit" class="btn btn-outline-danger">Çıkış Yap</button>
                                 </form>
                             </li>
-                        </ul>
-                    }
-                    else
-                    {
-                        <ul class="navbar-nav ms-auto">
+                        }
+                        else
+                        {
                             <li class="nav-item">
                                 <a class="btn btn-outline-primary me-2" asp-controller="Account" asp-action="SignIn">Giriş Yap</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="btn btn-outline-success" asp-controller="Account" asp-action="SignUp">Kayıt Ol</a>
                             </li>
-                        </ul>
-                    }
+                        }
+                    </ul>
+
+                   
                 </div>
 </div>
         </nav>
@@ -98,7 +92,7 @@
 
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
+  @*   <script>
         $(document).ready(function () {
             $.get("/Account/GetUserRole", function (data) {
                 console.log("Kullanıcı rolü:", data.role); // Tarayıcı konsoluna yazdır
@@ -117,7 +111,7 @@
                 console.log("Hata: Kullanıcı rolü alınamadı.");
             });
         });
-    </script>
+    </script> *@
 
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

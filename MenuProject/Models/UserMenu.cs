@@ -25,5 +25,9 @@ namespace MenuProject.Models
 
         [ForeignKey("ParentId")]
         public virtual UserMenu ParentMenu { get; set; }
+
+        // ❗ Yeni: Rol Seçmek İçin Kullanılacak Alan
+        [NotMapped]
+        public string SelectedRole { get; set; } // Kullanıcı bu rolü seçecek
     }
 }

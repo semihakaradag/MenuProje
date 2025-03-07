@@ -52,7 +52,15 @@
             <option value="false">Hayır</option>
         </select>
     </div>
-
+    <div class="form-group">
+        <label>Rol Seç</label>
+        <select asp-for="SelectedRole" class="form-control">
+            <option value="">Seçiniz</option>
+            <option value="Admin">Admin</option>
+            <option value="Student">Student</option>
+            <option value="Teacher">Teacher</option>
+        </select>
+    </div>
     <button type="submit" class="btn btn-success">Kaydet</button>
     <a class="btn btn-secondary" asp-action="Index">İptal</a>
 </form>

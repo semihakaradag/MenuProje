@@ -13,5 +13,7 @@ namespace MenuProject.Data
         }
         public DbSet<UserMenu> UserMenus { get; set; }
         public DbSet<RoleMenu> RoleMenus { get; set; }
+        public DbSet<Lesson> Lessons { get; set; }
+
     }
 }

@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using MenuProject.Data;
 using Microsoft.EntityFrameworkCore;
 using MenuProject.Models;
+using System.Security.Claims;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace MenuProject.Areas.Admin.Controllers
 {
@@ -16,11 +18,15 @@ namespace MenuProject.Areas.Admin.Controllers
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly MenuDbContext _context;
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private object _contextFactory;
+        private object _logger;
 
-        public AdminController(UserManager<IdentityUser> userManager,MenuDbContext context)
+        public AdminController(UserManager<IdentityUser> userManager,MenuDbContext context, SignInManager<IdentityUser> signInManager)
         {
             _userManager = userManager;
             _context = context;
+            _signInManager = signInManager;
         }
 
         // Admin Ana Sayfası
@@ -41,12 +47,43 @@ namespace MenuProject.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
+                // 1️⃣ Yeni menünün SortNumber'ını belirle
+                int newSortNumber = 1; // Varsayılan değer
+
+                if (menu.ParentId == null)
+                {
+                    // Ana menü ise en büyük ana menünün sırasını bulup +1 ekle
+                    var maxSort = _context.UserMenus.Where(m => m.ParentId == null).Max(m => (int?)m.SortNumber) ?? 0;
+                    newSortNumber = maxSort + 1;
+                }
+                else
+                {
+                    // Alt menü ise aynı ParentId'ye sahip en büyük SortNumber'ı bul
+                    var maxSort = _context.UserMenus.Where(m => m.ParentId == menu.ParentId).Max(m => (int?)m.SortNumber) ?? 0;
+                    newSortNumber = maxSort + 1;
+                }
+
+                menu.SortNumber = newSortNumber;
+
+                // 2️⃣ UserMenus tablosuna menüyü ekle
                 _context.UserMenus.Add(menu);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
+
+                // 3️⃣ Seçilen rol varsa, RoleMenus tablosuna da ekle
+                if (!string.IsNullOrEmpty(menu.SelectedRole))
+                {
+                    var roleMenu = new RoleMenu
+                    {
+                        RoleName = menu.SelectedRole, // Seçilen rolü al
+                        MenuId = menu.Id // Eklenen menünün ID'si
+                    };
+
+                    _context.RoleMenus.Add(roleMenu);
+                    _context.SaveChanges();
+                }
+
                 return RedirectToAction("Index");
             }
-
-            ViewBag.Menus = _context.UserMenus.Where(m => m.ParentId == null).ToList();
             return View(menu);
         }
 
@@ -58,9 +95,13 @@ namespace MenuProject.Areas.Admin.Controllers
             if (menu == null)
                 return NotFound();
 
-            ViewBag.Menus = _context.UserMenus.Where(m => m.ParentId == null).ToList();
+            // **📌 Doğru tabloya erişerek rollerin adlarını al**
+            ViewBag.Roles = await _context.Set<IdentityRole>().Select(r => r.Name).ToListAsync() ?? new List<string>();
+
+            ViewBag.Menus = await _context.UserMenus.Where(m => m.ParentId == null).ToListAsync();
             return View(menu);
         }
+
 
         // **📌 Menü Güncelleme İşlemi (POST)**
         [HttpPost]
@@ -70,14 +111,44 @@ namespace MenuProject.Areas.Admin.Controllers
             if (id != menu.Id)
                 return NotFound();
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _context.Update(menu);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                try
+                {
+                    var existingMenu = await _context.UserMenus.FindAsync(id);
+                    if (existingMenu != null)
+                    {
+                        existingMenu.Name = menu.Name;
+                        existingMenu.ControllerName = menu.ControllerName;
+                        existingMenu.ActionName = menu.ActionName;
+                        existingMenu.SortNumber = menu.SortNumber;
+                        existingMenu.ParentId = menu.ParentId;
+                        existingMenu.IsVisible = true;
+
+                        _context.Update(existingMenu);
+                        await _context.SaveChangesAsync();
+
+                        var user = await _userManager.GetUserAsync(User);
+                        if (user != null)
+                        {
+                            var claimsService = new ClaimsService(_userManager, _contextFactory, _logger);
+                            await claimsService.UpdateUserClaims(user);
+                            await _signInManager.RefreshSignInAsync(user);
+                        }
+                    }
+
+                    // **📌 JSON yerine doğrudan Dashboard sayfasına yönlendiriyoruz!**
+                    return RedirectToAction("Index", new { area = "Admin" });
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "Güncelleme hatası: " + ex.Message);
+                }
             }
 
+            ViewBag.Roles = await _context.Set<IdentityRole>().Select(r => r.Name).ToListAsync() ?? new List<string>();
             ViewBag.Menus = _context.UserMenus.Where(m => m.ParentId == null).ToList();
+
             return View(menu);
         }
 

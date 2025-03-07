@@ -1,8 +1,37 @@
 ﻿
 @{
     ViewData["Title"] = "Classes";
+    Layout = "~/Views/Shared/_MenuLayout.cshtml";
 }
 
+@model IEnumerable<Lesson>
+
 <h2>Derslerim</h2>
-<p>Şu an herhangi bir dersiniz bulunmamaktadır.</p>
+
+<a class="btn btn-primary" href="@Url.Action("AddClass", "Teacher")">+ Yeni Ders Ekle</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Başlık</th>
+            <th>Açıklama</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var lesson in Model)
+        {
+            <tr>
+                <td>@lesson.Title</td>
+                <td>@lesson.Description</td>
+                <td>
+                    <form asp-action="DeleteClass" asp-controller="Teacher" method="post">
+                        <input type="hidden" name="id" value="@lesson.Id" />
+                        <button type="submit" class="btn btn-danger">Sil</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
 

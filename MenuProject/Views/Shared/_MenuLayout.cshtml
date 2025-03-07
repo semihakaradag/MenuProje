@@ -50,6 +50,18 @@
             margin-top: auto;
         }
 
+    .dropdown-menu {
+        background-color: #ffffff !important; /* Beyaz arka plan */
+        border: none;
+    }
+
+    .dropdown-item {
+        color: black !important;
+    }
+
+        .dropdown-item:hover {
+            background-color: rgba(0, 0, 0, 0.1); /* Hafif gri hover efekti */
+        }
 </style>
 <!DOCTYPE html>
 <html lang="tr">
@@ -64,36 +76,50 @@
 <body>
     <div class="d-flex">
         <!-- 🔥 Sidebar Başlangıç -->
-        <nav class="sidebar bg-dark text-white p-3 vh-100" style="width: 250px;">
+        <nav class="sidebar bg-dark text-white p-3 vh-100" style="width: 250px;" id="sidebar-menu">
             <h4 class="text-center">Menü</h4>
             <ul class="nav flex-column">
                 @foreach (var menu in mainMenus)
                 {
                     var subMenuItems = subMenus.Where(sm => sm.ParentId == menu.Id).ToList();
+                    var url = menu.ControllerName == "Admin"
+                    ? Url.Action(menu.ActionName, menu.ControllerName, new { area = "Admin" })
+                    : Url.Action(menu.ActionName, menu.ControllerName);
 
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="@Url.Action(menu.ActionName, menu.ControllerName)">
-                            <i class="@menu.Icon"></i> @menu.Name
-                        </a>
-
-                        @if (subMenuItems.Any()) // Eğer alt menüler varsa
-                        {
-                            <ul class="nav flex-column ms-3">
+                    if (subMenuItems.Any()) // Eğer alt menü varsa dropdown yap
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="menu-@menu.Id" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="@menu.Icon"></i> @menu.Name
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="menu-@menu.Id">
                                 @foreach (var subMenu in subMenuItems)
                                 {
-                                    <li class="nav-item">
-                                        <a class="nav-link text-white" href="@Url.Action(subMenu.ActionName, subMenu.ControllerName)">
+                                    var subUrl = subMenu.ControllerName == "Admin"
+                                    ? Url.Action(subMenu.ActionName, subMenu.ControllerName, new { area = "Admin" })
+                                    : Url.Action(subMenu.ActionName, subMenu.ControllerName);
+
+                                    <li>
+                                        <a class="dropdown-item" href="@subUrl">
                                             <i class="@subMenu.Icon"></i> @subMenu.Name
                                         </a>
                                     </li>
                                 }
                             </ul>
-                        }
-                    </li>
-                }
+                        </li>
+                    }
+                    else // Normal menü (alt menüsü yoksa)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="@url">
+                                <i class="@menu.Icon"></i> @menu.Name
+                            </a>
+                        </li>
+                    }
+                 }
             </ul>
                 <!-- 🔥 Çıkış Yap Butonu -->
-                <form asp-controller="Account" asp-action="Logout" method="post">
+                <form asp-controller="Account" asp-action="Logout" asp-area="" method="post">
                     <button type="submit" class="btn btn-danger w-100">
                         <i class="fas fa-sign-out-alt"></i> Çıkış Yap
                     </button>
@@ -111,5 +137,29 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#editForm").submit(function (event) {
+                event.preventDefault(); // Sayfanın normal submit olmasını engelle
+
+                var formData = $(this).serialize();
+                $.ajax({
+                    url: $(this).attr("action"),
+                    type: "POST",
+                    data: formData,
+                    success: function (response) {
+                        // **Eğer başarılı ise Dashboard'a yönlendir**
+                        window.location.href = "/Admin/Dashboard/Index";
+                    },
+                    error: function () {
+                        alert("İşlem sırasında bir hata oluştu.");
+                    }
+                });
+            });
+        });
+    </script>
+
+
 </body>
 </html>

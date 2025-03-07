@@ -3,6 +3,70 @@
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_MenuLayout.cshtml";
 }
+@model MenuProject.Models.UserMenu
+<h2>Menü Düzenle</h2>
 
-<h1>Edit</h1>
+<form asp-action="Edit" method="post">
+   
 
+    <input type="hidden" asp-for="Id" />
+
+
+    <div class="form-group">
+        <label>Menü Adı</label>
+        <input asp-for="Name" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label>Controller Adı</label>
+        <input asp-for="ControllerName" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label>Action Adı</label>
+        <input asp-for="ActionName" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label>İkon (FontAwesome)</label>
+        <input asp-for="Icon" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Sıralama Numarası</label>
+        <input asp-for="SortNumber" type="number" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label>Alt Menü (ParentID)</label>
+        <select asp-for="ParentId" class="form-control">
+            <option value="">Ana Menü</option>
+            @foreach (var menu in ViewBag.Menus)
+            {
+                <option value="@menu.Id">@menu.Name</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Görünür mü?</label>
+        <select asp-for="IsVisible" class="form-control">
+            <option value="true">Evet</option>
+            <option value="false">Hayır</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Rol Seç</label>
+        <select asp-for="SelectedRole" class="form-control">
+            <option value="">Seçiniz</option>
+            @foreach (var role in ViewBag.Roles)
+            {
+                <option value="@role">@role</option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">Kaydet</button>
+    <a asp-action="Index" class="btn btn-secondary">İptal</a>
+</form>

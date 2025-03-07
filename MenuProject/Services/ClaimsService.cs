@@ -29,6 +29,9 @@ public class ClaimsService
         _logger = logger;
         _signInManager = signInManager;
     }
+    //Bu metod, bir kullanıcının sahip olduğu menü yetkilerini(claim'lerini) getirir.
+    //Bu metod kullanıcının erişebileceği menüleri buluyor ve claim'ler olarak döndürüyor.
+
 
     public async Task<List<Claim>> GetUserClaims(IdentityUser user)
     {
@@ -74,6 +77,7 @@ public class ClaimsService
 
         return claims;
     }
+    //u metod, kullanıcının claim'lerini sıfırlayıp güncelleyerek yetkilerini yeniliyor.
     public async Task UpdateUserClaims(IdentityUser user)
     {
         if (user == null)

@@ -61,11 +61,20 @@
 </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    <div class="d-flex">
+        @if (User.Identity!.IsAuthenticated) 
+        {
+            @await Component.InvokeAsync("Menu")
+        }
+
+        <!--  Ana İçerik -->
+        <div class="container-fluid p-4">
+            <main role="main">
+                @RenderBody()  
+            </main>
+        </div>
     </div>
+
 
     <footer class="border-top footer text-muted">
         <div class="container">

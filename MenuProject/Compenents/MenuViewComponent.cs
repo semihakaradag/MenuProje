@@ -36,6 +36,13 @@ namespace MenuProject.Components
                                 .OrderBy(m => m.SortNumber)
                                 .ToList();
 
+            // Debug için ikonları logla
+            foreach (var menu in allMenus)
+            {
+                Console.WriteLine($"Menü: {menu.Name}, İkon: {menu.Icon}");
+            }
+
+
             // Ana menüleri ve alt menüleri belirle
             var mainMenus = allMenus
                             .Where(m => m.ParentId == null &&
@@ -60,6 +67,9 @@ namespace MenuProject.Components
     public class MenuViewModel
     {
         public List<UserMenu> MainMenus { get; set; }
+
         public List<UserMenu> SubMenus { get; set; }
     }
+
+  
 }

@@ -6,7 +6,7 @@
 
 @{
     var user = HttpContextAccessor.HttpContext.User;
-    
+
 }
 
 
@@ -21,45 +21,43 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MenuProject.styles.css" asp-append-version="true" />
+    <!-- CoreUI Teması için CSS Dosyaları -->
+    <link rel="stylesheet" href="~/css/style.css" />
+    <link rel="stylesheet" href="~/css/style.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/examples.css" />
+    <link rel="stylesheet" href="~/css/examples.min.css" />
+    <link rel="stylesheet" href="~/css/vendors/simplebar.css" />
+
 </head>
 <body>
     <header>
 
-
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MenuProject</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        @if (User.Identity!.IsAuthenticated)
-                        {
-                            var currentUser = await UserManager.GetUserAsync(User);
-                            <li class="nav-item">
-                                <span class="nav-link">Hoş geldin, @(currentUser?.UserName ?? "Misafir")!</span>
-                            </li>
-                            <li class="nav-item">
-                                <form asp-controller="Account" asp-action="Logout" method="post">
-                                    <button type="submit" class="btn btn-outline-danger">Çıkış Yap</button>
-                                </form>
-                            </li>
-                        }
-                        else
-                        {
-                            <li class="nav-item">
-                                <a class="btn btn-outline-primary me-2" asp-controller="Account" asp-action="SignIn">Giriş Yap</a>
-                                <a class="btn btn-outline-success" asp-controller="Account" asp-action="SignUp">Kayıt Ol</a>
-                            </li>
-                        }
-                    </ul>
+        @if (!User.Identity!.IsAuthenticated) // Kullanıcı giriş yapmamışsa navbarı göster
+        {
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container-fluid">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MenuProject</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            @if (!User.Identity!.IsAuthenticated) // Kullanıcı giriş yapmamışsa
+                            {
+                                <li class="nav-item">
+                                    <a class="btn btn-outline-primary me-2" asp-controller="Account" asp-action="SignIn">Giriş Yap</a>
+                                    <a class="btn btn-outline-success" asp-controller="Account" asp-action="SignUp">Kayıt Ol</a>
+                                </li>
+                            }
+                        </ul>
 
                    
                 </div>
 </div>
         </nav>
+        }
     </header>
     <div class="d-flex">
         @if (User.Identity!.IsAuthenticated) 
@@ -76,11 +74,7 @@
     </div>
 
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - MenuProject - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+    
     <style>
         /* Navbar'ı sabit üstte tut */
         .navbar {
@@ -122,6 +116,23 @@
         });
     </script> *@
 
+    <!-- CoreUI ve Proje İçin Gerekli JS Dosyaları -->
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+
+    <!-- CoreUI Temel JavaScript Dosyaları -->
+    <script src="~/js/config.js"></script>
+    <script src="~/js/main.js"></script>
+    <script src="~/js/site.js"></script>
+
+    <!-- CoreUI Bileşenleri İçin JavaScript -->
+    <script src="~/js/widgets.js"></script>
+    <script src="~/js/tooltips.js"></script>
+    <script src="~/js/toasts.js"></script>
+    <script src="~/js/popovers.js"></script>
+    <script src="~/js/colors.js"></script>
+    <script src="~/js/charts.js"></script>
+    <script src="~/js/color-modes.js"></script>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

@@ -1,8 +1,4 @@
-﻿@{
-    ViewData["Title"] = "Ana Sayfa";
-}
-
-<div class="hero-container">
+﻿<div class="hero-container">
     <h1 class="hero-title">Sayfama Hoşgeldiniz.</h1>
     <p class="hero-subtitle">Sizlere en iyi deneyimi sunmak için buradayız.</p>
 </div>
@@ -25,20 +21,17 @@
 
     /* Arka planın sürekli renk değiştirmesi için animasyon */
     @@keyframes rainbowBG {
-        0%
+        0% {
+            background-position: 0% 50%;
+        }
 
-    {
-        background-position: 0% 50%;
-    }
+        50% {
+            background-position: 100% 50%;
+        }
 
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
-
+        100% {
+            background-position: 0% 50%;
+        }
     }
 
     /* Hero bölümünü ortala */
@@ -67,17 +60,14 @@
 
     /* Fade-in animasyonu */
     @@keyframes fadeIn {
-        from
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
 
-    {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 </style>

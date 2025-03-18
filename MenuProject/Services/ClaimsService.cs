@@ -29,9 +29,7 @@ public class ClaimsService
         _logger = logger;
         _signInManager = signInManager;
     }
-    //Bu metod, bir kullanıcının sahip olduğu menü yetkilerini(claim'lerini) getirir.
-    //Bu metod kullanıcının erişebileceği menüleri buluyor ve claim'ler olarak döndürüyor.
-
+   
 
     public async Task<List<Claim>> GetUserClaims(IdentityUser user)
     {
@@ -39,13 +37,13 @@ public class ClaimsService
 
         using (var context = _contextFactory.CreateDbContext())
         {
-            // Kullanıcının rollerini al
+            
             var userRoles = await _userManager.GetRolesAsync(user);
             _logger.LogInformation("Kullanıcının Rolleri: {Roles}", string.Join(", ", userRoles));
 
             if (!userRoles.Any()) return claims;
 
-            // RoleMenus'dan menü ID'lerini al
+          
             var roleMenuIds = await context.RoleMenus
                 .Where(rm => userRoles.Contains(rm.RoleName))
                 .Select(rm => rm.MenuId)
@@ -54,8 +52,7 @@ public class ClaimsService
             _logger.LogInformation("Erişilebilir RoleMenus: {Count} adet bulundu.", roleMenuIds.Count);
 
             if (!roleMenuIds.Any()) return claims;
-
-            // Yeni bir DbContext oluştur ve UserMenus'dan verileri al
+ 
             using (var newContext = _contextFactory.CreateDbContext())
             {
                 var userMenus = await newContext.UserMenus
@@ -65,7 +62,7 @@ public class ClaimsService
 
                 _logger.LogInformation("Erişilebilir UserMenus: {Count} adet bulundu.", userMenus.Count);
 
-                // Menüleri claim olarak ekleyelim
+             
                 foreach (var menu in userMenus)
                 {
                     var claimValue = $"{menu.ControllerName}/{menu.ActionName}/{menu.Name}";

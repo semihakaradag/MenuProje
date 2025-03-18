@@ -32,7 +32,37 @@ namespace MenuProject.Areas.Admin.Controllers
         // Admin Ana Sayfası
         public async Task<IActionResult> Index()
         {
+            // Kullanıcıları getir
+            var users = await _userManager.Users.ToListAsync();
+
+            // Rollerine göre kullanıcıları filtrele
+            var studentCount = 0;
+            var teacherCount = 0;
+
+            foreach (var user in users)
+            {
+                var roles = await _userManager.GetRolesAsync(user);
+                if (roles.Contains("Student"))
+                {
+                    studentCount++;
+                }
+                else if (roles.Contains("Teacher"))
+                {
+                    teacherCount++;
+                }
+            }
+
+            // Veritabanından menüleri çek
             var menus = await _context.UserMenus.OrderBy(m => m.SortNumber).ToListAsync();
+
+            // Modeli oluştur
+            var model = new UserRoleViewModel
+            {
+                StudentCount = studentCount,
+                TeacherCount = teacherCount,
+                Menus = menus // Menüleri modele ekledik
+            };
+
             return View(menus);
         }
         [HttpGet]

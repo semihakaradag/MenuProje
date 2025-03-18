@@ -6,10 +6,27 @@
 
 @model IEnumerable<MenuProject.Models.UserMenu>
 
-<h2>Menü Yönetimi</h2>
+<style>
+    .container-fluid {
+        padding-left: 20px; /* Sola biraz daha yakınlaşsın */
+    }
+
+    .table-container {
+        margin-left: -5px;
+        margin-top: -10px;
+    }
+
+</style>
+<div class="container-fluid mt-3 ms-3">
+    <div class="row">
+        <!-- Sidebar _Layout.cshtml'den geliyor -->
+        <!-- İçerik Alanı -->
+        <div class="col-md-9 ms-sm-auto px-4">
+            <h2>Menü İşlemleri</h2>
 <a class="btn btn-primary mb-3" asp-action="Create">+ Yeni Menü Ekle</a>
 
-<table class="table table-bordered">
+<div class="table-container">
+                <table class="table table-bordered table-striped">
     <thead>
         <tr>
             <th>ID</th>
@@ -45,4 +62,8 @@
         }
     </tbody>
 </table>
+</div>
+</div>
+</div>
+</div>
 

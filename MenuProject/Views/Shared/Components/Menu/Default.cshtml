@@ -1,8 +1,16 @@
 ﻿@model MenuProject.Components.MenuViewModel
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-<nav class="sidebar bg-dark text-white p-3 vh-100" style="width: 250px;" id="sidebar-menu">
-    <h4 class="text-center">Menü</h4>
-    <ul class="nav flex-column">
+</head>
+<div class="sidebar sidebar-dark sidebar-fixed border-end" id="sidebar">
+    <div class="sidebar-header border-bottom">
+        <div class="sidebar-brand">
+            <img src="~/assets/logo.png" alt="Logo" width="100">
+        </div>
+    </div>
+
+    <ul class="sidebar-nav" data-coreui="navigation" data-simplebar>
         @foreach (var menu in Model.MainMenus)
         {
             var subMenuItems = Model.SubMenus.Where(sm => sm.ParentId == menu.Id).ToList();
@@ -10,43 +18,46 @@
             ? Url.Action(menu.ActionName, menu.ControllerName, new { area = "Admin" })
             : Url.Action(menu.ActionName, menu.ControllerName);
 
-            if (subMenuItems.Any()) // Alt menü varsa dropdown yap
+            if (subMenuItems.Any()) // Eğer alt menü varsa, dropdown yapalım
             {
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-white" href="#" id="menu-@menu.Id" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="@menu.Icon"></i> @menu.Name
+                <li class="nav-group">
+                    <a class="nav-link nav-group-toggle" href="#">
+                        <i class="@menu.Icon nav-icon"></i> @menu.Name
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="menu-@menu.Id">
+                    <ul class="nav-group-items">
                         @foreach (var subMenu in subMenuItems)
                         {
                             var subUrl = subMenu.ControllerName == "Admin"
                             ? Url.Action(subMenu.ActionName, subMenu.ControllerName, new { area = "Admin" })
                             : Url.Action(subMenu.ActionName, subMenu.ControllerName);
 
-                            <li>
-                                <a class="dropdown-item" href="@subUrl">
-                                    <i class="@subMenu.Icon"></i> @subMenu.Name
+                            <li class="nav-item">
+                                <a class="nav-link" href="@subUrl">
+                                    <i class="@subMenu.Icon nav-icon"></i> @subMenu.Name
                                 </a>
                             </li>
                         }
                     </ul>
                 </li>
             }
-            else // Alt menü yoksa
+            else // Eğer alt menü yoksa, tek başına link olarak gösterelim
             {
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="@url">
-                        <i class="@menu.Icon"></i> @menu.Name
+                    <a class="nav-link" href="@url">
+                        <i class="@menu.Icon nav-icon"></i> @menu.Name
                     </a>
                 </li>
             }
         }
     </ul>
 
-    <!--  Çıkış Yap Butonu -->
-    <form asp-controller="Account" asp-action="Logout" asp-area="" method="post">
-        <button type="submit" class="btn btn-danger w-100">
-            <i class="fas fa-sign-out-alt"></i> Çıkış Yap
-        </button>
-    </form>
-</nav>
+    <!-- Çıkış Yap Butonu -->
+    <div class="sidebar-footer border-top p-2">
+        <form asp-controller="Account" asp-action="Logout" asp-area="" method="post">
+            <button type="submit" class="btn btn-danger w-100 d-flex align-items-center justify-content-center">
+                <i class="fa-solid fa-sign-out-alt me-2"></i>
+                <span>Çıkış Yap</span>
+            </button>
+        </form>
+    </div>
+</div>

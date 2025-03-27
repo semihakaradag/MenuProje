@@ -73,11 +73,11 @@ namespace MenuProject.Controllers
             {
                 var claims = await _claimsService.GetUserClaims(user);
 
-                // 🔥 Kullanıcının rollerini alıp claim olarak ekleyelim
+                //  Kullanıcının rollerini alıp claim olarak ekleyelim
                 var userRoles = await _userManager.GetRolesAsync(user);
                 foreach (var role in userRoles)
                 {
-                    claims.Add(new Claim(ClaimTypes.Role, role));  // 🚀 Rol claim olarak ekleniyor
+                    claims.Add(new Claim(ClaimTypes.Role, role));  // Rol claim olarak ekleniyor
                 }
 
                 if (claims.Any())
@@ -85,11 +85,11 @@ namespace MenuProject.Controllers
                     var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
 
-                    // 🔥 Önce eski oturumu temizleyelim
+                    // Önce eski oturumu temizleyelim
                     await _signInManager.SignOutAsync();
                     await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
-                    // 🔥 Yeni claim'lerle oturumu başlatalım
+                    // Yeni claim'lerle oturumu başlatalım
                     await HttpContext.SignInAsync(
                         CookieAuthenticationDefaults.AuthenticationScheme,
                         claimsPrincipal,
@@ -107,7 +107,15 @@ namespace MenuProject.Controllers
                 }
 
 
-                return RedirectToAction("Dashboard", "Home"); // 🔥 HERKES AYNI DASHBOARD'A GİDECEK
+                // Rol bazlı yönlendirme burada!
+                if (userRoles.Contains("Admin"))
+                    return RedirectToAction("AdminDashboard", "Home", new { area = "Admin" });
+                else if (userRoles.Contains("Student"))
+                    return RedirectToAction("StudentDashboard", "Home");
+                else if (userRoles.Contains("Teacher"))
+                    return RedirectToAction("TeacherDashboard", "Home");
+
+                return RedirectToAction("Index", "Home"); // fallback (rol yoksa)
             }
 
             if (result.IsLockedOut)
@@ -230,11 +238,10 @@ namespace MenuProject.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync(); // Kullanıcının oturumunu kapat
-            await HttpContext.SignOutAsync(); // ✅ Claims'leri temizle
+            await HttpContext.SignOutAsync(); // Claims'leri temizle
 
             return RedirectToAction("SignIn", "Account"); // Giriş sayfasına yönlendir
         }
-
 
     }
 }

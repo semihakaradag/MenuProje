@@ -1,8 +1,422 @@
 ﻿
 @{
     ViewData["Title"] = "Certificate";
-    Layout = "~/Views/Shared/_MenuLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Certificate</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="CoreUI - Bootstrap Admin Panel">
+    <meta name="author" content="Senin Adın">
+    <meta name="keyword" content="Bootstrap, Admin, Dashboard, .NET">
+    <title>Admin Panel</title>
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="57x57" href="assets/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="assets/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="assets/favicon/apple-icon-72x72.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="manifest" href="assets/favicon/manifest.json">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- CSS Dosyaları -->
+    <link rel="stylesheet" href="css/vendors/simplebar.css">
+    <link rel="stylesheet" href="css/simplebar.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/site.css">
+    <link rel="stylesheet" href="css/examples.css">
+
+    <!-- JavaScript Dosyaları -->
+    <script src="js/config.js"></script>
+    <script src="js/color-modes.js"></script>
+    <style>
+        body, .main-container {
+            padding-top: 0 !important;
+            margin-top: 0 !important;
+        }
+
+    </style>
+</head>
+<body>
+
+
+    <!-- Main Content -->
+    <div class="wrapper d-flex flex-column min-vh-100">
+        <header class="header header-sticky p-0 mb-4">
+            <div class="container-fluid border-bottom px-4">
+                <button class="header-toggler" type="button" onclick="coreui.Sidebar.getInstance(document.querySelector('#sidebar')).toggle()" style="margin-inline-start: -14px;">
+                    <svg class="icon icon-lg">
+                        <use xlink:href="@Url.Content("~/assets/icons/free.svg")#cil-menu"></use>
+                    </svg>
+                </button>
+                <ul class="header-nav d-none d-lg-flex">
+                    <li class="nav-item"><a class="nav-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Gösterge Paneli</font></font></a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Kurslar</font></font></a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ayarlar</font></font></a></li>
+                </ul>
+                <ul class="header-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <svg class="icon icon-lg">
+                                <use xlink:href="@Url.Content("~/assets/icons/free.svg")#cil-bell"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <svg class="icon icon-lg">
+                                <use xlink:href="@Url.Content("~/assets/icons/free.svg")#cil-list-rich"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <svg class="icon icon-lg">
+                                <use xlink:href="@Url.Content("~/assets/icons/free.svg")#cil-envelope-open"></use>
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="header-nav">
+                    <li class="nav-item py-1">
+                        <div class="vr h-100 mx-2 text-body text-opacity-75"></div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <button class="btn btn-link nav-link py-2 px-2 d-flex align-items-center" type="button" aria-expanded="false" data-coreui-toggle="dropdown">
+                            <svg class="icon icon-lg theme-icon-active">
+                                <use xlink:href="@Url.Content("~/assets/icons/free.svg")#cil-sun"></use>
+                            </svg>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" style="--cui-dropdown-min-width: 8rem;">
+                            <li>
+                                <button class="dropdown-item d-flex align-items-center active" type="button" data-coreui-theme-value="light">
+                                    <svg class="icon icon-lg me-3">
+                                        <use xlink:href="@Url.Content("~/assets/icons/free.svg")#cil-sun"></use>
+                                    </svg><font style="vertical-align: inherit;">
+                                        <font style="vertical-align: inherit;">
+                                            Işık
+                                        </font>
+                                    </font>
+                                </button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item d-flex align-items-center" type="button" data-coreui-theme-value="dark">
+                                    <svg class="icon icon-lg me-3">
+                                        <use xlink:href="@Url.Content("~/assets/icons/free.svg")#cil-moon"></use>
+                                    </svg><font style="vertical-align: inherit;">
+                                        <font style="vertical-align: inherit;">
+                                            Karanlık
+                                        </font>
+                                    </font>
+                                </button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item d-flex align-items-center" type="button" data-coreui-theme-value="auto">
+                                    <svg class="icon icon-lg me-3">
+                                        <use xlink:href="@Url.Content("~/assets/icons/free.svg")#cil-contrast"></use>
+                                    </svg><font style="vertical-align: inherit;">
+                                        <font style="vertical-align: inherit;">
+                                            Otomatik
+                                        </font>
+                                    </font>
+                                </button>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item py-1">
+                        <div class="vr h-100 mx-2 text-body text-opacity-75"></div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link py-0 pe-0" data-coreui-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                            <div class="avatar avatar-md"><img class="avatar-img" src="@Url.Content("~/assets/img/avatars/8.jpg")" alt="kullanıcı@e-posta.com"></div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end pt-0">
+                            <div class="dropdown-header bg-body-tertiary text-body-secondary fw-semibold rounded-top mb-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Hesap</font></font></div><a class="dropdown-item" href="#">
+                                <svg class="icon me-2">
+                                    <use xlink:href="@Url.Content("~/assets/icons/free.svg")#cil-bell"></use>
+                                </svg><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Güncellemeler</font></font><span class="badge badge-sm bg-info ms-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">42</font></font></span>
+                            </a><a class="dropdown-item" href="#">
+                                <svg class="icon me-2">
+                                    <use xlink:href="@Url.Content("~/assets/icons/free.svg")#cil-envelope-open"></use>
+                                </svg><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Mesajlar</font></font><span class="badge badge-sm bg-success ms-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">42</font></font></span>
+                            </a><a class="dropdown-item" href="#">
+                                <svg class="icon me-2">
+                                    <use xlink:href="@Url.Content("~/assets/icons/free.svg")#cil-task"></use>
+                                </svg><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Görevler</font></font><span class="badge badge-sm bg-danger ms-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">42</font></font></span>
+                            </a><a class="dropdown-item" href="#">
+                                <svg class="icon me-2">
+                                    <use xlink:href="@Url.Content("~/assets/icons/free.svg")#cil-comment-square"></use>
+                                </svg><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Yorumlar</font></font><span class="badge badge-sm bg-warning ms-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">42</font></font></span>
+                            </a>
+                            <div class="dropdown-header bg-body-tertiary text-body-secondary fw-semibold my-2">
+                                <div class="fw-semibold"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ayarlar</font></font></div>
+                            </div><a class="dropdown-item" href="#">
+                                <svg class="icon me-2">
+                                    <use xlink:href="@Url.Content("~/assets/icons/free.svg")#cil-user"></use>
+                                </svg><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Profil</font></font>
+                            </a><a class="dropdown-item" href="#">
+                                <svg class="icon me-2">
+                                    <use xlink:href="@Url.Content("~/assets/icons/free.svg")#cil-settings"></use>
+                                </svg><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ayarlar</font></font>
+                            </a><a class="dropdown-item" href="#">
+                                <svg class="icon me-2">
+                                    <use xlink:href="@Url.Content("~/assets/icons/free.svg")#cil-credit-card"></use>
+                                </svg><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ödemeler</font></font><span class="badge badge-sm bg-secondary ms-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">42</font></font></span>
+                            </a><a class="dropdown-item" href="#">
+                                <svg class="icon me-2">
+                                    <use xlink:href="@Url.Content("~/assets/icons/free.svg")#cil-file"></use>
+                                </svg><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Projeler</font></font><span class="badge badge-sm bg-primary ms-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">42</font></font></span>
+                            </a>
+                            <div class="dropdown-divider"></div><a class="dropdown-item" href="#">
+                                <svg class="icon me-2">
+                                    <use xlink:href="@Url.Content("~/assets/icons/free.svg")#cil-lock-locked"></use>
+                                </svg><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Hesabı Kilitle</font></font>
+                            </a><a class="dropdown-item" href="#">
+                                <svg class="icon me-2">
+                                    <use xlink:href="@Url.Content("~/assets/icons/free.svg")#cil-account-logout"></use>
+                                </svg><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Çıkış Yap</font></font>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="container-fluid px-4">
+                <nav aria-label="ekmek kırıntısı">
+                    <ol class="breadcrumb my-0">
+                        <li class="breadcrumb-item">
+                            <a href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ev</font></font></a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            <span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Gösterge Paneli</font></font></span>
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </header>
+        <div class="body flex-grow-1">
+            <div class="container-lg px-4">
+<div class="col-md-12">
+    <div class="card mb-4">
+        <div class="card-header"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sertifaka İşlemleri</font></font></div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="border-start border-start-4 border-start-info px-3 mb-3">
+                                <div class="small text-body-secondary text-truncate"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tamamlanan Sertifikalı Eğitimler</font></font></div>
+                                <div class="fs-5 fw-semibold"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2 Sertifika</font></font></div>
+                            </div>
+                        </div>
+                        <!-- /.col-->
+                        <div class="col-6">
+                            <div class="border-start border-start-4 border-start-danger px-3 mb-3">
+                                <div class="small text-body-secondary text-truncate"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Devam Eden Eğitimler</font></font></div>
+                                <div class="fs-5 fw-semibold"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">10 Eğitim</font></font></div>
+                            </div>
+                        </div>
+                        <!-- /.col-->
+                    </div>
+                    <!-- /.row-->
+                    <hr class="mt-0">
+                    <div class="progress-group mb-4">
+                        <div class="progress-group-prepend"><span class="text-body-secondary small"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Pazartesi</font></font></span></div>
+                        <div class="progress-group-bars">
+                            <div class="progress progress-thin">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 34%" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="progress progress-thin">
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: 78%" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="progress-group mb-4">
+                        <div class="progress-group-prepend"><span class="text-body-secondary small"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Salı</font></font></span></div>
+                        <div class="progress-group-bars">
+                            <div class="progress progress-thin">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 56%" aria-valuenow="56" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="progress progress-thin">
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: 94%" aria-valuenow="94" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="progress-group mb-4">
+                        <div class="progress-group-prepend"><span class="text-body-secondary small"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Çarşamba</font></font></span></div>
+                        <div class="progress-group-bars">
+                            <div class="progress progress-thin">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 12%" aria-valuenow="12" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="progress progress-thin">
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: 67%" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="progress-group mb-4">
+                        <div class="progress-group-prepend"><span class="text-body-secondary small"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Perşembe</font></font></span></div>
+                        <div class="progress-group-bars">
+                            <div class="progress progress-thin">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 43%" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="progress progress-thin">
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: 91%" aria-valuenow="91" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="progress-group mb-4">
+                        <div class="progress-group-prepend"><span class="text-body-secondary small"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Cuma</font></font></span></div>
+                        <div class="progress-group-bars">
+                            <div class="progress progress-thin">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 22%" aria-valuenow="22" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="progress progress-thin">
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: 73%" aria-valuenow="73" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="progress-group mb-4">
+                        <div class="progress-group-prepend"><span class="text-body-secondary small"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Cumartesi</font></font></span></div>
+                        <div class="progress-group-bars">
+                            <div class="progress progress-thin">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 53%" aria-valuenow="53" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="progress progress-thin">
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: 82%" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="progress-group mb-4">
+                        <div class="progress-group-prepend"><span class="text-body-secondary small"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Pazar</font></font></span></div>
+                        <div class="progress-group-bars">
+                            <div class="progress progress-thin">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 9%" aria-valuenow="9" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="progress progress-thin">
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: 69%" aria-valuenow="69" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-->
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="border-start border-start-4 border-start-warning px-3 mb-3">
+                                <div class="small text-body-secondary text-truncate"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Eğitim Başarı Oranı</font></font></div>
+                                <div class="fs-5 fw-semibold"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">%43</font></font></div>
+                            </div>
+                        </div>
+                        <!-- /.col-->
+                        <div class="col-6">
+                            <div class="border-start border-start-4 border-start-success px-3 mb-3">
+                                <div class="small text-body-secondary text-truncate"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sertifika Alma Yolları</font></font></div>
+                                <div class="fs-5 fw-semibold"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">49.123</font></font></div>
+                            </div>
+                        </div>
+                        <!-- /.col-->
+                    </div>
+                    <!-- /.row-->
+                    <hr class="mt-0">
+                    <div class="progress-group">
+                        <div class="progress-group-header">
+
+                            <div><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Başarıyla Geçilen Testler</font></font></div>
+                            <div class="ms-auto fw-semibold"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">%43</font></font></div>
+                        </div>
+                        <div class="progress-group-bars">
+                            <div class="progress progress-thin">
+                                <div class="progress-bar bg-warning" role="progressbar" style="width: 43%" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="progress-group mb-5">
+                        <div class="progress-group-header">
+
+                            <div><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Başarısız Testler / Yarım Bırakılanlar</font></font></div>
+                            <div class="ms-auto fw-semibold"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">%37</font></font></div>
+                        </div>
+                        <div class="progress-group-bars">
+                            <div class="progress progress-thin">
+                                <div class="progress-bar bg-warning" role="progressbar" style="width: 43%" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="progress-group">
+                        <div class="progress-group-header">
+
+                            <div><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sınavla Alınan Sertifikalar</font></font></div>
+                            <div class="ms-auto fw-semibold me-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">191.235</font></font></div>
+                            <div class="text-body-secondary small"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">(56%)</font></font></div>
+                        </div>
+                        <div class="progress-group-bars">
+                            <div class="progress progress-thin">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 56%" aria-valuenow="56" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="progress-group">
+                        <div class="progress-group-header">
+
+                            <div><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Otomatik Sertifikalı Eğitimler</font></font></div>
+                            <div class="ms-auto fw-semibold me-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">51.223</font></font></div>
+                            <div class="text-body-secondary small"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">(15%)</font></font></div>
+                        </div>
+                        <div class="progress-group-bars">
+                            <div class="progress progress-thin">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="progress-group">
+                        <div class="progress-group-header">
+
+                            <div><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Manuel Onay Gerektiren Sertifikalar</font></font></div>
+                            <div class="ms-auto fw-semibold me-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">37.564</font></font></div>
+                            <div class="text-body-secondary small"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">(%11)</font></font></div>
+                        </div>
+                        <div class="progress-group-bars">
+                            <div class="progress progress-thin">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 11%" aria-valuenow="11" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="progress-group">
+                        <div class="progress-group-header">
+
+                            <div><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Katılım Sertifikaları</font></font></div>
+                            <div class="ms-auto fw-semibold me-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">27.319</font></font></div>
+                            <div class="text-body-secondary small"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">(%8)</font></font></div>
+                        </div>
+                        <div class="progress-group-bars">
+                            <div class="progress progress-thin">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 8%" aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-->
+            </div>
+        </div>
+    </div>
+</div></div>
+</div>
+</div>
+
+        <!-- JavaScript -->
+        <!-- CoreUI JS -->
+        <script src="~/js/coreui.bundle.min.js"></script>
+        <script src="~/js/simplebar.min.js"></script>
+        <script src="~/js/chart.umd.js"></script>
+        <script src="~/js/coreui-chartjs.js"></script>
+        <script src="~/js/index.js"></script>
+        <script src="~/js/main.js"></script>
+
+</body>
+
+</html>
+
 

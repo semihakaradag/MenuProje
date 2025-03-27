@@ -4,7 +4,204 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @model MenuProject.Models.UserMenu
-<h2>Menü Düzenle</h2>s
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="CoreUI - Bootstrap Admin Panel">
+    <meta name="author" content="Senin Adın">
+    <meta name="keyword" content="Bootstrap, Admin, Dashboard, .NET">
+    <title>Admin Panel</title>
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="57x57" href="assets/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="assets/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="assets/favicon/apple-icon-72x72.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="manifest" href="assets/favicon/manifest.json">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- CSS Dosyaları -->
+    <link rel="stylesheet" href="css/vendors/simplebar.css">
+    <link rel="stylesheet" href="css/simplebar.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/site.css">
+    <link rel="stylesheet" href="css/examples.css">
+
+    <!-- JavaScript Dosyaları -->
+    <script src="js/config.js"></script>
+    <script src="js/color-modes.js"></script>
+    <style>
+        body, .main-container {
+            padding-top: 0 !important;
+            margin-top: 0 !important;
+        }
+
+    </style>
+
+</head>
+<body>
+
+
+    <!-- Main Content -->
+    <div class="wrapper d-flex flex-column min-vh-100">
+        <header class="header header-sticky p-0 mb-4">
+            <div class="container-fluid border-bottom px-4">
+                <button class="header-toggler" type="button" onclick="coreui.Sidebar.getInstance(document.querySelector('#sidebar')).toggle()" style="margin-inline-start: -14px;">
+                    <svg class="icon icon-lg">
+                        <use xlink:href="@Url.Content("~/assets/icons/free.svg")#cil-menu"></use>
+                    </svg>
+                </button>
+                <ul class="header-nav d-none d-lg-flex">
+                    <li class="nav-item"><a class="nav-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Gösterge Paneli</font></font></a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Kullanıcılar</font></font></a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ayarlar</font></font></a></li>
+                </ul>
+                <ul class="header-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <svg class="icon icon-lg">
+                                <use xlink:href="@Url.Content("~/assets/icons/free.svg")#cil-bell"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <svg class="icon icon-lg">
+                                <use xlink:href="@Url.Content("~/assets/icons/free.svg")#cil-list-rich"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <svg class="icon icon-lg">
+                                <use xlink:href="@Url.Content("~/assets/icons/free.svg")#cil-envelope-open"></use>
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="header-nav">
+                    <li class="nav-item py-1">
+                        <div class="vr h-100 mx-2 text-body text-opacity-75"></div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <button class="btn btn-link nav-link py-2 px-2 d-flex align-items-center" type="button" aria-expanded="false" data-coreui-toggle="dropdown">
+                            <svg class="icon icon-lg theme-icon-active">
+                                <use xlink:href="@Url.Content("~/assets/icons/free.svg")#cil-sun"></use>
+                            </svg>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" style="--cui-dropdown-min-width: 8rem;">
+                            <li>
+                                <button class="dropdown-item d-flex align-items-center active" type="button" data-coreui-theme-value="light">
+                                    <svg class="icon icon-lg me-3">
+                                        <use xlink:href="@Url.Content("~/assets/icons/free.svg")#cil-sun"></use>
+                                    </svg><font style="vertical-align: inherit;">
+                                        <font style="vertical-align: inherit;">
+                                            Işık
+                                        </font>
+                                    </font>
+                                </button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item d-flex align-items-center" type="button" data-coreui-theme-value="dark">
+                                    <svg class="icon icon-lg me-3">
+                                        <use xlink:href="@Url.Content("~/assets/icons/free.svg")#cil-moon"></use>
+                                    </svg><font style="vertical-align: inherit;">
+                                        <font style="vertical-align: inherit;">
+                                            Karanlık
+                                        </font>
+                                    </font>
+                                </button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item d-flex align-items-center" type="button" data-coreui-theme-value="auto">
+                                    <svg class="icon icon-lg me-3">
+                                        <use xlink:href="@Url.Content("~/assets/icons/free.svg")#cil-contrast"></use>
+                                    </svg><font style="vertical-align: inherit;">
+                                        <font style="vertical-align: inherit;">
+                                            Otomatik
+                                        </font>
+                                    </font>
+                                </button>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item py-1">
+                        <div class="vr h-100 mx-2 text-body text-opacity-75"></div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link py-0 pe-0" data-coreui-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                            <div class="avatar avatar-md"><img class="avatar-img" src="@Url.Content("~/assets/img/avatars/8.jpg")" alt="kullanıcı@e-posta.com"></div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end pt-0">
+                            <div class="dropdown-header bg-body-tertiary text-body-secondary fw-semibold rounded-top mb-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Hesap</font></font></div><a class="dropdown-item" href="#">
+                                <svg class="icon me-2">
+                                    <use xlink:href="@Url.Content("~/assets/icons/free.svg")#cil-bell"></use>
+                                </svg><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Güncellemeler</font></font><span class="badge badge-sm bg-info ms-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">42</font></font></span>
+                            </a><a class="dropdown-item" href="#">
+                                <svg class="icon me-2">
+                                    <use xlink:href="@Url.Content("~/assets/icons/free.svg")#cil-envelope-open"></use>
+                                </svg><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Mesajlar</font></font><span class="badge badge-sm bg-success ms-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">42</font></font></span>
+                            </a><a class="dropdown-item" href="#">
+                                <svg class="icon me-2">
+                                    <use xlink:href="@Url.Content("~/assets/icons/free.svg")#cil-task"></use>
+                                </svg><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Görevler</font></font><span class="badge badge-sm bg-danger ms-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">42</font></font></span>
+                            </a><a class="dropdown-item" href="#">
+                                <svg class="icon me-2">
+                                    <use xlink:href="@Url.Content("~/assets/icons/free.svg")#cil-comment-square"></use>
+                                </svg><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Yorumlar</font></font><span class="badge badge-sm bg-warning ms-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">42</font></font></span>
+                            </a>
+                            <div class="dropdown-header bg-body-tertiary text-body-secondary fw-semibold my-2">
+                                <div class="fw-semibold"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ayarlar</font></font></div>
+                            </div><a class="dropdown-item" href="#">
+                                <svg class="icon me-2">
+                                    <use xlink:href="@Url.Content("~/assets/icons/free.svg")#cil-user"></use>
+                                </svg><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Profil</font></font>
+                            </a><a class="dropdown-item" href="#">
+                                <svg class="icon me-2">
+                                    <use xlink:href="@Url.Content("~/assets/icons/free.svg")#cil-settings"></use>
+                                </svg><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ayarlar</font></font>
+                            </a><a class="dropdown-item" href="#">
+                                <svg class="icon me-2">
+                                    <use xlink:href="@Url.Content("~/assets/icons/free.svg")#cil-credit-card"></use>
+                                </svg><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ödemeler</font></font><span class="badge badge-sm bg-secondary ms-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">42</font></font></span>
+                            </a><a class="dropdown-item" href="#">
+                                <svg class="icon me-2">
+                                    <use xlink:href="@Url.Content("~/assets/icons/free.svg")#cil-file"></use>
+                                </svg><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Projeler</font></font><span class="badge badge-sm bg-primary ms-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">42</font></font></span>
+                            </a>
+                            <div class="dropdown-divider"></div><a class="dropdown-item" href="#">
+                                <svg class="icon me-2">
+                                    <use xlink:href="@Url.Content("~/assets/icons/free.svg")#cil-lock-locked"></use>
+                                </svg><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Hesabı Kilitle</font></font>
+                            </a><a class="dropdown-item" href="#">
+                                <svg class="icon me-2">
+                                    <use xlink:href="@Url.Content("~/assets/icons/free.svg")#cil-account-logout"></use>
+                                </svg><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Çıkış Yap</font></font>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="container-fluid px-4">
+                <nav aria-label="ekmek kırıntısı">
+                    <ol class="breadcrumb my-0">
+                        <li class="breadcrumb-item">
+                            <a href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ev</font></font></a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            <span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Gösterge Paneli</font></font></span>
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </header>
+<h2>Menü Düzenle</h2>
 
 <form asp-action="Edit" method="post">
    
@@ -70,3 +267,15 @@
     <button type="submit" class="btn btn-success">Kaydet</button>
     <a asp-action="Index" class="btn btn-secondary">İptal</a>
 </form>
+</div>
+    <!-- JavaScript -->
+    <!-- CoreUI JS -->
+    <script src="~/js/coreui.bundle.min.js"></script>
+    <script src="~/js/simplebar.min.js"></script>
+    <script src="~/js/chart.umd.js"></script>
+    <script src="~/js/coreui-chartjs.js"></script>
+    <script src="~/js/index.js"></script>
+    <script src="~/js/main.js"></script>
+</body>
+
+</html>

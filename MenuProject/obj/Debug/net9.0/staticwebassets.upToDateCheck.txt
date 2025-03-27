@@ -1114,7 +1114,13 @@ C:\Users\semih\source\repos\MenuProject\MenuProject\wwwroot\assets\icons\brands\
 C:\Users\semih\source\repos\MenuProject\MenuProject\wwwroot\assets\icons\globe-alt.svg
 C:\Users\semih\source\repos\MenuProject\MenuProject\wwwroot\assets\icons\brands\slack.svg
 C:\Users\semih\source\repos\MenuProject\MenuProject\wwwroot\assets\icons\brands\cc-paypal.svg
+wwwroot\assets\brand\1_3IcLSFuT8PQg4cUBaRXH1A.png
 wwwroot\assets\brand\coreui.svg
+wwwroot\assets\brand\images (1).jpeg
+wwwroot\assets\brand\images.jpeg
+wwwroot\assets\brand\images.png
+wwwroot\assets\brand\indir (1).png
+wwwroot\assets\brand\indir.png
 wwwroot\assets\favicon\android-icon-144x144.png
 wwwroot\assets\favicon\android-icon-192x192.png
 wwwroot\assets\favicon\android-icon-36x36.png

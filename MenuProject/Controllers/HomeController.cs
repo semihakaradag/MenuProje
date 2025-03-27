@@ -32,6 +32,17 @@ namespace MenuProject.Controllers
             return View(); // Herkes ayný Dashboard sayfasýna gidiyor ama menü rollere göre deðiþiyor!
         }
 
+        public IActionResult StudentDashboard()
+        {
+            return View();
+
+        }
+
+        public IActionResult TeacherDashboard()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

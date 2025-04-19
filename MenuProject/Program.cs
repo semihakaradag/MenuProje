@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using MenuProject.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using MenuProject.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,8 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 })
 .AddEntityFrameworkStores<MenuDbContext>()
 .AddDefaultTokenProviders();
+
+builder.Services.AddScoped<ICourseService, CourseService>();
 
 // Yetkilendirme Politikalarýný Ekleyelim
 builder.Services.AddAuthorization(options =>

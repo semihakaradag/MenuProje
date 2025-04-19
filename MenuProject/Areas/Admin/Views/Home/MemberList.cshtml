@@ -1,0 +1,85 @@
+﻿@model MenuProject.Areas.Admin.ViewModels.MemberListViewModel
+
+<div style="margin-left: 260px; margin-top: 30px;">
+    <h3 class="mb-4">Üye Listesi</h3>
+
+    <h4>Öğrenciler</h4>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Ad</th>
+                <th>Soyad</th>
+                <th>Telefon</th>
+                <th>Doğum Tarihi</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var s in Model.Students)
+            {
+                <tr>
+                    <td>@s.FirstName</td>
+                    <td>@s.LastName</td>
+                    <td>@s.PhoneNumber</td>
+                    <td>@s.BirthDate.ToShortDateString()</td>
+                    <td>@s.AppUser.Email</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h4>Eksik Bilgili Öğrenciler</h4>
+    @if (Model.IncompleteStudents.Any())
+    {
+        <ul>
+            @foreach (var s in Model.IncompleteStudents)
+            {
+                <li>@s.AppUser.Email → Eksik bilgi</li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p class="text-success">Tüm öğrenciler eksiksiz.</p>
+    }
+
+    <hr />
+
+    <h4>Öğretmenler</h4>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Ad</th>
+                <th>Soyad</th>
+                <th>Telefon</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var t in Model.Teachers)
+            {
+                <tr>
+                    <td>@t.FirstName</td>
+                    <td>@t.LastName</td>
+                    <td>@t.PhoneNumber</td>
+                    <td>@t.AppUser.Email</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h4>Eksik Bilgili Öğretmenler</h4>
+    @if (Model.IncompleteTeachers.Any())
+    {
+        <ul>
+            @foreach (var t in Model.IncompleteTeachers)
+            {
+                <li>@t.AppUser.Email → Eksik bilgi</li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p class="text-success">Tüm öğretmenler eksiksiz.</p>
+    }
+</div>

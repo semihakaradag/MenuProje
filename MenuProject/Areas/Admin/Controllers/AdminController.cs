@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using MenuProject.Models;
 using System.Security.Claims;
 using Microsoft.EntityFrameworkCore.Internal;
+using MenuProject.Areas.Admin.ViewModels;
 
 namespace MenuProject.Areas.Admin.Controllers
 {
@@ -194,6 +195,7 @@ namespace MenuProject.Areas.Admin.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+      
     }
 
     //// Üye Listesi Sayfası

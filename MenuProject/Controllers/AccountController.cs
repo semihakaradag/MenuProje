@@ -72,7 +72,7 @@ namespace MenuProject.Controllers
             if (result.Succeeded)
             {
                 var claims = await _claimsService.GetUserClaims(user);
-
+                claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id));
                 //  Kullanıcının rollerini alıp claim olarak ekleyelim
                 var userRoles = await _userManager.GetRolesAsync(user);
                 foreach (var role in userRoles)

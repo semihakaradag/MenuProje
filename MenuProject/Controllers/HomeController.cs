@@ -21,7 +21,7 @@ namespace MenuProject.Controllers
         {
             if (User.Identity!.IsAuthenticated)
             {
-                return RedirectToAction("Dashboard", "Home"); // Herkes ortak Dashboard'a gidecek
+                return RedirectToAction("Index", "Home"); // Herkes ortak Dashboard'a gidecek
             }
             return View(); // Eðer giriþ yapýlmamýþsa Welcome sayfasýný göster
         }

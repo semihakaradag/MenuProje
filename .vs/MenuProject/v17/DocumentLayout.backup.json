@@ -3,28 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\semih\\source\\repos\\MenuProject\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DFC1A140-42C4-43AB-B972-9FECBF01287F}|MenuProject\\MenuProject.csproj|c:\\users\\semih\\source\\repos\\menuproject\\menuproject\\views\\student\\courses.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{DFC1A140-42C4-43AB-B972-9FECBF01287F}|MenuProject\\MenuProject.csproj|solutionrelative:menuproject\\views\\student\\courses.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{DFC1A140-42C4-43AB-B972-9FECBF01287F}|MenuProject\\MenuProject.csproj|c:\\users\\semih\\source\\repos\\menuproject\\menuproject\\views\\shared\\components\\menu\\default.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{DFC1A140-42C4-43AB-B972-9FECBF01287F}|MenuProject\\MenuProject.csproj|solutionrelative:menuproject\\views\\shared\\components\\menu\\default.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DFC1A140-42C4-43AB-B972-9FECBF01287F}|MenuProject\\MenuProject.csproj|c:\\users\\semih\\source\\repos\\menuproject\\menuproject\\views\\home\\studentdashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{DFC1A140-42C4-43AB-B972-9FECBF01287F}|MenuProject\\MenuProject.csproj|solutionrelative:menuproject\\views\\home\\studentdashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{DFC1A140-42C4-43AB-B972-9FECBF01287F}|MenuProject\\MenuProject.csproj|c:\\users\\semih\\source\\repos\\menuproject\\menuproject\\controllers\\teachercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DFC1A140-42C4-43AB-B972-9FECBF01287F}|MenuProject\\MenuProject.csproj|solutionrelative:menuproject\\controllers\\teachercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DFC1A140-42C4-43AB-B972-9FECBF01287F}|MenuProject\\MenuProject.csproj|c:\\users\\semih\\source\\repos\\menuproject\\menuproject\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DFC1A140-42C4-43AB-B972-9FECBF01287F}|MenuProject\\MenuProject.csproj|solutionrelative:menuproject\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DFC1A140-42C4-43AB-B972-9FECBF01287F}|MenuProject\\MenuProject.csproj|c:\\users\\semih\\source\\repos\\menuproject\\menuproject\\views\\home\\teacherdashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{DFC1A140-42C4-43AB-B972-9FECBF01287F}|MenuProject\\MenuProject.csproj|solutionrelative:menuproject\\views\\home\\teacherdashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DFC1A140-42C4-43AB-B972-9FECBF01287F}|MenuProject\\MenuProject.csproj|c:\\users\\semih\\source\\repos\\menuproject\\menuproject\\areas\\admin\\views\\admin\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{DFC1A140-42C4-43AB-B972-9FECBF01287F}|MenuProject\\MenuProject.csproj|solutionrelative:menuproject\\areas\\admin\\views\\admin\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DFC1A140-42C4-43AB-B972-9FECBF01287F}|MenuProject\\MenuProject.csproj|c:\\users\\semih\\source\\repos\\menuproject\\menuproject\\areas\\admin\\views\\admin\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{DFC1A140-42C4-43AB-B972-9FECBF01287F}|MenuProject\\MenuProject.csproj|solutionrelative:menuproject\\areas\\admin\\views\\admin\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DFC1A140-42C4-43AB-B972-9FECBF01287F}|MenuProject\\MenuProject.csproj|c:\\users\\semih\\source\\repos\\menuproject\\menuproject\\areas\\admin\\views\\admin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{DFC1A140-42C4-43AB-B972-9FECBF01287F}|MenuProject\\MenuProject.csproj|solutionrelative:menuproject\\areas\\admin\\views\\admin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{DFC1A140-42C4-43AB-B972-9FECBF01287F}|MenuProject\\MenuProject.csproj|c:\\users\\semih\\source\\repos\\menuproject\\menuproject\\views\\home\\studentdashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{DFC1A140-42C4-43AB-B972-9FECBF01287F}|MenuProject\\MenuProject.csproj|solutionrelative:menuproject\\views\\home\\studentdashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,84 +30,76 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Courses.cshtml",
-              "DocumentMoniker": "C:\\Users\\semih\\source\\repos\\MenuProject\\MenuProject\\Views\\Student\\Courses.cshtml",
-              "RelativeDocumentMoniker": "MenuProject\\Views\\Student\\Courses.cshtml",
-              "ToolTip": "C:\\Users\\semih\\source\\repos\\MenuProject\\MenuProject\\Views\\Student\\Courses.cshtml",
-              "RelativeToolTip": "MenuProject\\Views\\Student\\Courses.cshtml",
-              "ViewState": "AgIAACQAAAAAAAAAAAAAACoAAAAZAAAAAAAAAA==",
+              "Title": "Default.cshtml",
+              "DocumentMoniker": "C:\\Users\\semih\\source\\repos\\MenuProject\\MenuProject\\Views\\Shared\\Components\\Menu\\Default.cshtml",
+              "RelativeDocumentMoniker": "MenuProject\\Views\\Shared\\Components\\Menu\\Default.cshtml",
+              "ToolTip": "C:\\Users\\semih\\source\\repos\\MenuProject\\MenuProject\\Views\\Shared\\Components\\Menu\\Default.cshtml",
+              "RelativeToolTip": "MenuProject\\Views\\Shared\\Components\\Menu\\Default.cshtml",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAADcAAABVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-27T03:18:59Z",
+              "WhenOpened": "2025-04-14T07:13:31.99Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Create.cshtml",
-              "DocumentMoniker": "C:\\Users\\semih\\source\\repos\\MenuProject\\MenuProject\\Areas\\Admin\\Views\\Admin\\Create.cshtml",
-              "RelativeDocumentMoniker": "MenuProject\\Areas\\Admin\\Views\\Admin\\Create.cshtml",
-              "ToolTip": "C:\\Users\\semih\\source\\repos\\MenuProject\\MenuProject\\Areas\\Admin\\Views\\Admin\\Create.cshtml",
-              "RelativeToolTip": "MenuProject\\Areas\\Admin\\Views\\Admin\\Create.cshtml",
-              "ViewState": "AgIAAPoAAAAAAAAAAAAuwAUBAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-27T01:29:58.317Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Edit.cshtml",
-              "DocumentMoniker": "C:\\Users\\semih\\source\\repos\\MenuProject\\MenuProject\\Areas\\Admin\\Views\\Admin\\Edit.cshtml",
-              "RelativeDocumentMoniker": "MenuProject\\Areas\\Admin\\Views\\Admin\\Edit.cshtml",
-              "ToolTip": "C:\\Users\\semih\\source\\repos\\MenuProject\\MenuProject\\Areas\\Admin\\Views\\Admin\\Edit.cshtml",
-              "RelativeToolTip": "MenuProject\\Areas\\Admin\\Views\\Admin\\Edit.cshtml",
-              "ViewState": "AgIAAAUBAAAAAAAAAAAAABUBAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-27T01:22:29.917Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\semih\\source\\repos\\MenuProject\\MenuProject\\Areas\\Admin\\Views\\Admin\\Index.cshtml",
-              "RelativeDocumentMoniker": "MenuProject\\Areas\\Admin\\Views\\Admin\\Index.cshtml",
-              "ToolTip": "C:\\Users\\semih\\source\\repos\\MenuProject\\MenuProject\\Areas\\Admin\\Views\\Admin\\Index.cshtml",
-              "RelativeToolTip": "MenuProject\\Areas\\Admin\\Views\\Admin\\Index.cshtml",
-              "ViewState": "AgIAAPAAAAAAAAAAAAAAAAABAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-27T01:16:14.571Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\semih\\source\\repos\\MenuProject\\MenuProject\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "MenuProject\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\semih\\source\\repos\\MenuProject\\MenuProject\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "MenuProject\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAIwBwAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-27T08:11:55.801Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TeacherController.cs",
+              "DocumentMoniker": "C:\\Users\\semih\\source\\repos\\MenuProject\\MenuProject\\Controllers\\TeacherController.cs",
+              "RelativeDocumentMoniker": "MenuProject\\Controllers\\TeacherController.cs",
+              "ToolTip": "C:\\Users\\semih\\source\\repos\\MenuProject\\MenuProject\\Controllers\\TeacherController.cs",
+              "RelativeToolTip": "MenuProject\\Controllers\\TeacherController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADYAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-27T08:09:00.281Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "TeacherDashboard.cshtml",
               "DocumentMoniker": "C:\\Users\\semih\\source\\repos\\MenuProject\\MenuProject\\Views\\Home\\TeacherDashboard.cshtml",
               "RelativeDocumentMoniker": "MenuProject\\Views\\Home\\TeacherDashboard.cshtml",
               "ToolTip": "C:\\Users\\semih\\source\\repos\\MenuProject\\MenuProject\\Views\\Home\\TeacherDashboard.cshtml",
               "RelativeToolTip": "MenuProject\\Views\\Home\\TeacherDashboard.cshtml",
-              "ViewState": "AgIAAJADAAAAAAAAAAAAAKADAAAoAAAAAAAAAA==",
+              "ViewState": "AgIAADwAAAAAAAAAAAAAAEQAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-27T01:02:45.794Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-27T01:02:45.794Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "StudentDashboard.cshtml",
               "DocumentMoniker": "C:\\Users\\semih\\source\\repos\\MenuProject\\MenuProject\\Views\\Home\\StudentDashboard.cshtml",
               "RelativeDocumentMoniker": "MenuProject\\Views\\Home\\StudentDashboard.cshtml",
               "ToolTip": "C:\\Users\\semih\\source\\repos\\MenuProject\\MenuProject\\Views\\Home\\StudentDashboard.cshtml",
               "RelativeToolTip": "MenuProject\\Views\\Home\\StudentDashboard.cshtml",
-              "ViewState": "AgIAACUDAAAAAAAAAAAAANAAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAADoAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-25T15:05:19.365Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-25T15:05:19.365Z"
             }
           ]
         },

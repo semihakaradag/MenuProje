@@ -20,7 +20,7 @@ namespace MenuProject.Models
         [Required]
         public string LastName { get; set; }
 
-        public string PhoneNumber { get; set; }
+        public string? PhoneNumber { get; set; }
 
         [Required]
         [DataType(DataType.Date)]

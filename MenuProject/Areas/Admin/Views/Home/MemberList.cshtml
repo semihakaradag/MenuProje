@@ -1,4 +1,10 @@
-﻿@model MenuProject.Areas.Admin.ViewModels.MemberListViewModel
+﻿
+@{
+    ViewData["Title"] = "MemberList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model MenuProject.Areas.Admin.ViewModels.MemberListViewModel
 
 <div style="margin-left: 260px; margin-top: 30px;">
     <h3 class="mb-4">Üye Listesi</h3>
@@ -31,12 +37,27 @@
     <h4>Eksik Bilgili Öğrenciler</h4>
     @if (Model.IncompleteStudents.Any())
     {
-        <ul>
-            @foreach (var s in Model.IncompleteStudents)
-            {
-                <li>@s.AppUser.Email → Eksik bilgi</li>
-            }
-        </ul>
+        <table class="table table-bordered table-warning">
+            <thead>
+                <tr>
+                    <th>Ad</th>
+                    <th>Soyad</th>
+                    <th>Email</th>
+                    <th>Eksik Alan</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var s in Model.IncompleteStudents)
+                {
+                    <tr>
+                        <td>@s.FirstName</td>
+                        <td>@s.LastName</td>
+                        <td>@s.AppUser.Email</td>
+                        <td>Telefon</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     }
     else
     {
@@ -71,15 +92,32 @@
     <h4>Eksik Bilgili Öğretmenler</h4>
     @if (Model.IncompleteTeachers.Any())
     {
-        <ul>
-            @foreach (var t in Model.IncompleteTeachers)
-            {
-                <li>@t.AppUser.Email → Eksik bilgi</li>
-            }
-        </ul>
+        <table class="table table-bordered table-warning">
+            <thead>
+                <tr>
+                    <th>Ad</th>
+                    <th>Soyad</th>
+                    <th>Email</th>
+                    <th>Eksik Alan</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var t in Model.IncompleteTeachers)
+                {
+                    <tr>
+                        <td>@t.FirstName</td>
+                        <td>@t.LastName</td>
+                        <td>@t.AppUser.Email</td>
+                        <td>Telefon</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     }
     else
     {
         <p class="text-success">Tüm öğretmenler eksiksiz.</p>
     }
 </div>
+
+

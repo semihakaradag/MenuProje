@@ -1,5 +1,6 @@
 ﻿using MenuProject.Areas.Admin.ViewModels;
 using MenuProject.Data;
+using MenuProject.Helpers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -22,27 +23,22 @@ namespace MenuProject.Areas.Admin.Controllers
         {
             return View(); 
         }
+
+
+        [ServiceFilter(typeof(IncompleteUserFilterAttribute))]
         public IActionResult MemberList()
         {
-            var students = _context.Students.Include(x => x.AppUser).ToList();
-            var teachers = _context.Teachers.Include(x => x.AppUser).ToList();
+            var students = _context.Students.Include(s => s.AppUser).ToList();
+            var teachers = _context.Teachers.Include(t => t.AppUser).ToList();
 
-            var incompleteStudents = students.Where(s =>
-                string.IsNullOrWhiteSpace(s.FirstName) ||
-                string.IsNullOrWhiteSpace(s.LastName) ||
-                s.BirthDate == DateTime.MinValue
-            ).ToList();
-
-            var incompleteTeachers = teachers.Where(t =>
-                string.IsNullOrWhiteSpace(t.FirstName) ||
-                string.IsNullOrWhiteSpace(t.LastName)
-            ).ToList();
+            var incompleteStudents = students.Where(s => string.IsNullOrEmpty(s.PhoneNumber)).ToList();
+            var incompleteTeachers = teachers.Where(t => string.IsNullOrEmpty(t.PhoneNumber)).ToList();
 
             var model = new MemberListViewModel
             {
                 Students = students,
-                IncompleteStudents = incompleteStudents,
                 Teachers = teachers,
+                IncompleteStudents = incompleteStudents,
                 IncompleteTeachers = incompleteTeachers
             };
 

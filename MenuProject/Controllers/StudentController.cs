@@ -74,10 +74,18 @@ namespace MenuProject.Controllers
             if (user == null)
                 return RedirectToAction("SignIn", "Account");
 
+
+            user.PhoneNumber = model.PhoneNumber;
+            await _userManager.SetPhoneNumberAsync(user, model.PhoneNumber);
             var existingStudent = await _context.Students.FirstOrDefaultAsync(s => s.AppUserId == user.Id);
             if (existingStudent != null)
             {
-                // Gerekirse burada güncelleme yapılabilir
+                existingStudent.FirstName = model.FirstName;
+                existingStudent.LastName = model.LastName;
+                existingStudent.PhoneNumber = model.PhoneNumber;
+                existingStudent.BirthDate = model.BirthDate!.Value;
+
+                await _context.SaveChangesAsync();
                 return RedirectToAction("StudentDashboard", "Home");
             }
 

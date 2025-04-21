@@ -1,4 +1,5 @@
 ﻿using MenuProject.Data;
+using MenuProject.Helpers;
 using MenuProject.Models;
 using MenuProject.Services;
 using MenuProject.ViewModels;
@@ -84,7 +85,7 @@ namespace MenuProject.Controllers
             return View(courses);
         }
 
-
+        [ServiceFilter(typeof(MissingTeacherInfoFilter))]
         [HttpGet]
         public IActionResult AddCourse()
         {
@@ -138,15 +139,33 @@ namespace MenuProject.Controllers
                 return View(model);
 
             var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+                return RedirectToAction("SignIn", "Account");
 
-            // Zaten kaydı var mı kontrol et
+           
+            if (string.IsNullOrWhiteSpace(model.PhoneNumber))
+            {
+                await _userManager.SetPhoneNumberAsync(user, null);
+            }
+            else
+            {
+                await _userManager.SetPhoneNumberAsync(user, model.PhoneNumber);
+            }
+
+          
             var existing = await _context.Teachers.FirstOrDefaultAsync(t => t.AppUserId == user.Id);
             if (existing != null)
             {
-                // İsteğe bağlı: update de edebilirsin burada
+               
+                existing.FirstName = model.FirstName;
+                existing.LastName = model.LastName;
+                existing.PhoneNumber = model.PhoneNumber;
+
+                await _context.SaveChangesAsync();
                 return RedirectToAction("TeacherDashboard", "Home");
             }
 
+            
             var teacher = new Teacher
             {
                 AppUserId = user.Id,
@@ -157,7 +176,8 @@ namespace MenuProject.Controllers
 
             _context.Teachers.Add(teacher);
             await _context.SaveChangesAsync();
+
             return RedirectToAction("TeacherDashboard", "Home");
         }
-    }
+        }
 }

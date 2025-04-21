@@ -29,6 +29,9 @@ builder.Services.AddScoped<ICourseService, CourseService>();
 
 builder.Services.AddScoped<IncompleteUserFilterAttribute>();
 
+builder.Services.AddScoped<MissingTeacherInfoFilter>();
+
+
 
 // Yetkilendirme Politikalarýný Ekleyelim
 builder.Services.AddAuthorization(options =>

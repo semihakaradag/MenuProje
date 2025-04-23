@@ -1384,3 +1384,4 @@ C:\Users\semih\source\repos\MenuProject\MenuProject\obj\Debug\net9.0\compressed\
 C:\Users\semih\source\repos\MenuProject\MenuProject\obj\Debug\net9.0\compressed\7t9jncwnna-729llq7uo5.gz
 C:\Users\semih\source\repos\MenuProject\MenuProject\obj\Debug\net9.0\compressed\2qd2hzb3e5-tuvp3o26l1.gz
 C:\Users\semih\source\repos\MenuProject\MenuProject\obj\Debug\net9.0\compressed\idzu8u0erz-ub329mjpvv.gz
+C:\Users\semih\source\repos\MenuProject\MenuProject\bin\Debug\net9.0\TS.Result.dll

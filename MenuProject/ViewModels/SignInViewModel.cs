@@ -5,7 +5,7 @@ namespace MenuProject.ViewModels
     public class SignInViewModel
     {
         [Required(ErrorMessage = "Email gereklidir.")]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Geçerli bir e-posta adresi giriniz.")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Şifre gereklidir.")]

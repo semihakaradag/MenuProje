@@ -95,26 +95,7 @@
 
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  @*   <script>
-        $(document).ready(function () {
-            $.get("/Account/GetUserRole", function (data) {
-                console.log("Kullanıcı rolü:", data.role); // Tarayıcı konsoluna yazdır
-                if (data.role === "Student") {
-                    $("#nav-links").html(`
-                        <li class="nav-item"><a class="nav-link" href="/Student/Courses">Kurslarım</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/Student/Exams">Sınavlarım</a></li>
-                    `);
-                } else if (data.role === "Teacher") {
-                    $("#nav-links").html(`
-                        <li class="nav-item"><a class="nav-link" href="/Teacher/Classes">Derslerim</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/Teacher/Students">Öğrencilerim</a></li>
-                    `);
-                }
-            }).fail(function () {
-                console.log("Hata: Kullanıcı rolü alınamadı.");
-            });
-        });
-    </script> *@
+  
 
     <!-- CoreUI ve Proje İçin Gerekli JS Dosyaları -->
     <script src="~/lib/jquery/jquery.min.js"></script>
@@ -137,6 +118,10 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <!-- UNOBTRUSIVE VALIDATION - EKLENMESİ GEREKEN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

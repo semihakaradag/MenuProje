@@ -82,50 +82,21 @@
 <script src="~/js/index.js"></script>
 <script src="~/js/main.js"></script>
 
-<style>
-    /* Form Kutularına Işık Efekti */
-    .form-control:focus {
-        box-shadow: 0px 0px 8px rgba(0, 123, 255, 0.7);
-        border-color: #007bff;
-    }
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
 
-    /* Giriş Yap Butonu */
-    .btn-primary {
-        width: 100%;
-        font-size: 18px;
-        font-weight: bold;
-        transition: all 0.3s ease;
-    }
+    <script>
+        $(function () {
+            $("form").on("submit", function () {
+                if (!$(this).valid()) {
+                    $(this).find(".input-validation-error").addClass("is-invalid");
+                }
+            });
+        });
+    </script>
+}
 
-        .btn-primary:hover {
-            background-color: #0056b3;
-            box-shadow: 0px 0px 10px rgba(0, 123, 255, 0.7);
-        }
-    /* Ana Container'ı Yukarı Taşı */
-    .container {
-        margin-top: -50px; /* Yukarı taşır */
-    }
 
-    /* Form Kutusunu Yukarı Taşı */
-    .card-group {
-        margin-top: -30px; /* Formu biraz yukarı alır */
-    }
 
-    /* Giriş Kartını Küçült */
-    .card.col-md-7 {
-        padding: 30px;
-    }
-
-    /* Kayıt Ol Kartını Küçült */
-    .card.col-md-5 {
-        padding: 40px;
-    }
-
-   
-
-    .card-group {
-        margin-top: 0px;
-    }
-
-    }
-</style>

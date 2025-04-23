@@ -218,29 +218,23 @@ namespace MenuProject.Controllers
                 {
                     await _roleManager.CreateAsync(new IdentityRole("Teacher"));
                 }
-
                 await _userManager.AddToRoleAsync(user, "Teacher");
-
                 TempData["SuccessMessage"] = "Kayıt başarılı! Lütfen giriş yapınız.";
                 return RedirectToAction("SignIn", "Account");
             }
-
-            // **Hata mesajlarını ekrana yazdır**
             foreach (var error in result.Errors)
             {
                 ModelState.AddModelError("", $"Hata: {error.Description}");
-            }
-
+            } 
             return View("SignUp", model);
         }
-
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
-            await _signInManager.SignOutAsync(); // Kullanıcının oturumunu kapat
+            await _signInManager.SignOutAsync(); 
             await HttpContext.SignOutAsync(); // Claims'leri temizle
 
-            return RedirectToAction("SignIn", "Account"); // Giriş sayfasına yönlendir
+            return RedirectToAction("SignIn", "Account");
         }
 
     }

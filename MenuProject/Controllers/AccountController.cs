@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using MenuProject.Services;
+using TS.Result;
 
 namespace MenuProject.Controllers
 {
@@ -15,14 +17,16 @@ namespace MenuProject.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ClaimsService _claimsService;
         private readonly ILogger<AccountController> _logger;
+        private readonly AuthService _authService; 
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager, ClaimsService claimsService, ILogger<AccountController> logger)
+        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager, ClaimsService claimsService, ILogger<AccountController> logger, AuthService authService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
             _claimsService = claimsService;
             _logger = logger;
+            _authService = authService;
         }
         public IActionResult SignIn()
         {
@@ -55,77 +59,52 @@ namespace MenuProject.Controllers
         public async Task<IActionResult> SignIn(SignInViewModel model)
         {
             if (!ModelState.IsValid)
+                return View(model);
+
+            var result = await _authService.SignInAsync(model);
+
+            if (!result.IsSuccessful) // ❗ dikkat: IsSuccessful
             {
+                var error = result.ErrorMessages?.FirstOrDefault() ?? "Bir hata oluştu.";
+                ModelState.AddModelError(string.Empty, error);
                 return View(model);
             }
 
-            var user = await _userManager.FindByEmailAsync(model.Email);
+            var user = result.Data; // ❗ dikkat: Data
 
-            if (user == null)
+            // Giriş işlemleri (claim ekleme, cookie oluşturma, yönlendirme) burada devam eder
+
+            var claims = await _claimsService.GetUserClaims(user);
+            claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id));
+
+            var userRoles = await _userManager.GetRolesAsync(user);
+            foreach (var role in userRoles)
             {
-                ModelState.AddModelError(string.Empty, "Email veya şifre yanlış.");
-                return View(model);
+                claims.Add(new Claim(ClaimTypes.Role, role));
             }
 
-            var result = await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, true);
+            await _signInManager.SignOutAsync();
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
-            if (result.Succeeded)
-            {
-                var claims = await _claimsService.GetUserClaims(user);
-                claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id));
-                //  Kullanıcının rollerini alıp claim olarak ekleyelim
-                var userRoles = await _userManager.GetRolesAsync(user);
-                foreach (var role in userRoles)
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme)),
+                new AuthenticationProperties
                 {
-                    claims.Add(new Claim(ClaimTypes.Role, role));  // Rol claim olarak ekleniyor
-                }
+                    IsPersistent = true,
+                    ExpiresUtc = DateTime.UtcNow.AddHours(1)
+                });
 
-                if (claims.Any())
-                {
-                    var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                    var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+            if (userRoles.Contains("Admin"))
+                return RedirectToAction("AdminDashboard", "Home", new { area = "Admin" });
 
-                    // Önce eski oturumu temizleyelim
-                    await _signInManager.SignOutAsync();
-                    await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            if (userRoles.Contains("Student"))
+                return RedirectToAction("StudentDashboard", "Home");
 
-                    // Yeni claim'lerle oturumu başlatalım
-                    await HttpContext.SignInAsync(
-                        CookieAuthenticationDefaults.AuthenticationScheme,
-                        claimsPrincipal,
-                        new AuthenticationProperties
-                        {
-                            IsPersistent = true,
-                            ExpiresUtc = DateTime.UtcNow.AddHours(1)
-                        });
+            if (userRoles.Contains("Teacher"))
+                return RedirectToAction("TeacherDashboard", "Home");
 
-                    _logger.LogInformation("Kullanıcı için menü claimleri ve rol claimleri eklendi.");
-                }
-                else
-                {
-                    _logger.LogError("Kullanıcı için herhangi bir menü veya rol claimi bulunamadı.");
-                }
-
-
-                // Rol bazlı yönlendirme burada!
-                if (userRoles.Contains("Admin"))
-                    return RedirectToAction("AdminDashboard", "Home", new { area = "Admin" });
-                else if (userRoles.Contains("Student"))
-                    return RedirectToAction("StudentDashboard", "Home");
-                else if (userRoles.Contains("Teacher"))
-                    return RedirectToAction("TeacherDashboard", "Home");
-
-                return RedirectToAction("Index", "Home"); // fallback (rol yoksa)
-            }
-
-            if (result.IsLockedOut)
-            {
-                ModelState.AddModelError(string.Empty, "Çok fazla başarısız giriş yaptınız, 3 dakika sonra tekrar deneyin.");
-                return View(model);
-            }
-
-            ModelState.AddModelError(string.Empty, "Email veya şifre yanlış.");
-            return View(model);
+            return RedirectToAction("Index", "Home");
         }
         [HttpGet]
         public IActionResult DebugClaims()

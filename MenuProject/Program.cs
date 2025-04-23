@@ -29,6 +29,10 @@ builder.Services.AddScoped<ICourseService, CourseService>();
 
 builder.Services.AddScoped<IncompleteUserFilterAttribute>();
 
+builder.Services.AddScoped<AuthService>();
+
+
+
 builder.Services.AddScoped<MissingTeacherInfoFilter>();
 
 
